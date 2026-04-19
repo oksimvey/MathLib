@@ -46,7 +46,7 @@ int main() {
     std::vector<float> vertices;
 
     float T = 2.0f * 3.1415926535f;
-    int N = 2000;
+    int N = 1000;
 
     for (int i = 0; i < N; i++) {
         float t = (float)i / (N - 1) * T;

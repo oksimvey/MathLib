@@ -14,11 +14,11 @@ class Transformation {
     
     transform(const AbstractVector<input_dim>& vec) const = 0;
 
-    constexpr int getInputDimension() const {
+    static constexpr int getInputDimension() {
         return input_dim;
     }
 
-    constexpr int getOutputDimension() const {
+    static constexpr int getOutputDimension() {
         return output_dim;
     }
 };

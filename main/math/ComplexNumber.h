@@ -9,6 +9,8 @@
 
 #include "math/MathUtils.h"
 
+#include "math/vectors/Vector2D.h"
+
 class ComplexNumber {
 
   private:
@@ -265,6 +267,10 @@ class ComplexNumber {
             return std::to_string(real_) + " + " + std::to_string(imag_) + "i";
 
         return std::to_string(real_) + " - " + std::to_string(-imag_) + "i";
+    }
+
+    Vector2D toVector2D() const {
+        return Vector2D(real_, imag_);
     }
 
     std::string printInPolarForm() const {

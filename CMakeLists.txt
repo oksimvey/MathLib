@@ -11,15 +11,15 @@ add_executable(MathLib_main
         main/math/calculus/Integration.cpp
         main/math/curves/BezierCurve.cpp
         main/math/curves/Curve.cpp
-        main/math/vectors/2DVector.cpp
-        main/math/vectors/3DVector.cpp
         main/math/MathUtils.cpp
         main/physics/AbstractPhysicsInstance.cpp
-        main/rendering/screen/AbstractScreen.cpp
-        main/rendering/screen/Screen2D.cpp
         main/rendering/screen/Screen3D.cpp
         main/rendering/RenderingUtils.cpp
         main/math/transformations/LinearTransformation.h
+        main/math/vectors/Vector3D.h
+        main/math/vectors/Vector2D.h
+        main/rendering/screen/AbstractScreen.h
+        main/rendering/screen/Screen2D.h
 )
 
 target_include_directories(MathLib_main PRIVATE

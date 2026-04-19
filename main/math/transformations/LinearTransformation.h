@@ -37,11 +37,7 @@ class LinearTransformation : public Transformation<input_dim, output_dim> {
         return toreturn;
     }
 
-    LinearTransformation operator*(const ComplexNumber& scalar) const;
-
     LinearTransformation operator*(const float& scalar) const;
-
-    LinearTransformation operator/(const ComplexNumber& scalar) const;
 
     LinearTransformation operator/(const float& scalar) const;
 
@@ -68,8 +64,6 @@ class LinearTransformation : public Transformation<input_dim, output_dim> {
 
     LinearTransformation operator+(const LinearTransformation& transformation) const;
 
-    LinearTransformation operator+(const ComplexNumber& number) const;
-
     LinearTransformation operator+(const float& number) const;
 
     LinearTransformation operator-(const AbstractVector<input_dim>& vector) const;
@@ -91,9 +85,9 @@ class LinearTransformation : public Transformation<input_dim, output_dim> {
 
     LinearTransformation inverse() const;
 
-    ComplexNumber trace() const;
+    float trace() const;
 
-    std::vector<ComplexNumber> eigenValues() const;
+    std::vector<float> eigenValues() const;
 
     std::vector<AbstractVector<output_dim>> eigenVectors() const;
 
@@ -103,7 +97,7 @@ class LinearTransformation : public Transformation<input_dim, output_dim> {
 
     int rank() const;
 
-    ComplexNumber det() const;
+    float det() const;
 
     bool isOrtonormal() const;
 
@@ -114,7 +108,7 @@ class LinearTransformation : public Transformation<input_dim, output_dim> {
             result += "[ ";
 
             for (int col = 0; col < input_dim; col++) {
-                result += (basis[col].getComponents()[row]).printInCartesianForm();
+                result += std::to_string(basis[col].getComponents()[row]);
 
                 if (col < input_dim - 1)
                     result += " ";

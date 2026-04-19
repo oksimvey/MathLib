@@ -5,7 +5,7 @@
 
 class AbstractScreen {
 
-    AbstractScreen(int widht, int height, AbstractVector pos);
+    AbstractScreen(int width, int height, AbstractVector pos);
 
     void init() const;
 
@@ -16,7 +16,6 @@ class AbstractScreen {
     void renderRectangle(const AbstractVector& vec1, const AbstractVector& vec2) const;
 
     void renderCurve(const Curve& curve) const;
-    
 
 };
 

@@ -5,13 +5,12 @@
 #include <cmath>
 #include <string>
 
-#include "math/ComplexNumber.h"
-
 template <int dim>
 
 class AbstractVector {
 
   public:
+
     std::array<float, dim> components;
 
     // =========================
@@ -22,23 +21,22 @@ class AbstractVector {
         components.fill(0.0f);
     }
 
-    template <typename T> static float toComplex(T value) {
+    template <typename T>
+    static float toFloat(T value) {
         return static_cast<float>(value);
     }
 
-    static ComplexNumber toComplex(const ComplexNumber& value) {
-        return value;
-    }
-
     template <typename... Args>
-    AbstractVector(Args... args) : components{toComplex(args)...} {
+    explicit AbstractVector(Args... args)
+        : components{toFloat(args)...}
+    {
         static_assert(sizeof...(Args) == dim, "Wrong dimension");
     }
     // =========================
     // getters
     // =========================
 
-    constexpr int getDimension() const {
+    static constexpr int getDimension() {
         return dim;
     }
 
