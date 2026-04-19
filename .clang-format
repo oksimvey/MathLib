@@ -1,0 +1,37 @@
+BasedOnStyle: LLVM
+
+# ===================== BASE =====================
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 90
+
+# ===================== BRACES =====================
+# chave na mesma linha (SEU pedido)
+BreakBeforeBraces: Attach
+
+# ===================== FUNCTIONS =====================
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+
+# ===================== FORMATAÇÃO MATEMÁTICA =====================
+# deixa expressões quebradas (importante pra ComplexNumber)
+BinPackArguments: false
+BinPackParameters: false
+
+# melhora leitura de fórmulas
+PenaltyBreakBeforeFirstCallParameter: 50
+
+# ===================== ESPAÇAMENTO LIMPO =====================
+SpaceBeforeParens: ControlStatements
+SpaceBeforeAssignmentOperators: true
+
+SpacesInParentheses: false
+SpacesInAngles: false
+
+# ===================== POINTER STYLE =====================
+PointerAlignment: Left
+
+# ===================== COMMENTS =====================
+ReflowComments: false
