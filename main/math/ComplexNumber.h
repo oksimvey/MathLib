@@ -9,8 +9,6 @@
 
 #include "math/MathUtils.h"
 
-#include "math/vectors/Vector2D.h"
-
 class ComplexNumber {
 
   private:

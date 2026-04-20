@@ -5,6 +5,7 @@
 #include <vector>
 #include <cmath>
 #include "rendering/screen/Screen2D.h"
+#include "math/transformations/LinearTransformation.h"
 
 // shaders
 const char* vertexShaderSource = R"(
@@ -29,21 +30,42 @@ void main()
 }
 )";
 
+
+static AbstractVector<2> f(const float x) {
+    return AbstractVector<2>(cos(x),sin(x));
+}
+
 int main() {
 
-    auto screen = Screen2D(800, 600, Vector2D(0, 0));
-    screen.init();
-    screen.addLine(Line(0.5, 0.5, 0.5, -0.5, 1, 0, 1, 1, 5));
-    screen.addLine(Line(-0.5, 0.5, 0.5, 0.5, 0, 1, 1, 1, 5));
+    auto screen2_d = Screen2D(800, 600, AbstractVector<2>(0,0));
 
-    screen.addLine(Line(-0.5, -0.5, 0.5, -0.5, 1, 0, 0, 1, 5));
+    screen2_d.init();
+
+    screen2_d.addLine(Line(-100, 0, 100, 0, 1, 1, 1, 1, 5));
+    screen2_d.addLine(Line(0, -100, 0, 100, 1, 1, 1, 1, 5));
+
+    float a = 0;
+    float b = 6.28;
+    int steps = 100;
+
+    for (int i = 0; i < steps; i++) {
+        float t1 = a + (b - a) * (float)i / (float)steps;
+        float t2 = a + (b - a) * (float)(i + 1) / (float)steps;
+        float x = f(t1).getComponents()[0];
+        float y = f(t1).getComponents()[1];
+        float x2 = f(t2).getComponents()[0];
+        float y2 = f(t2).getComponents()[1];
+
+        screen2_d.addLine(Line(x, y, x2, y2, 1, 1, 1, 1, 5));
+
+    }
 
 
-    screen.addLine(Line(-0.5, 0.5, -0.5, -0.5, 0, 0, 1, 1, 5));
-    screen.loop();
+    screen2_d.loop();
 
     return 0;
 }
+
  /*
     glfwInit();
 

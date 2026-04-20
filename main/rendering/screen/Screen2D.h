@@ -1,17 +1,22 @@
 #ifndef SCREEN2D_H
 #define SCREEN2D_H
 
+#include "math/transformations/LinearTransformation.h"
 #include "math/vectors/Vector2D.h"
+#include "math/vectors/AbstractVector.h"
 #include "rendering/Line.h"
 #include "rendering/screen/AbstractScreen.h"
 #include <GLFW/glfw3.h>
+#include <cmath>
 #include <glad/glad.h>
 #include <iostream>
 class Screen2D : public AbstractScreen<2> {
 
 public:
 
-    Screen2D(const int w, const int h, const Vector2D pos)
+    float zoom = 1.0f;
+
+    Screen2D(const int w, const int h, const AbstractVector<2> pos)
         : AbstractScreen(w, h, pos) {}
 
     GLFWwindow* window;
@@ -44,7 +49,7 @@ public:
 
     glfwMakeContextCurrent(window);
 
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+    if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress))) {
         std::cout << "Failed to init GLAD\n";
         return;
     }
@@ -111,11 +116,63 @@ void main()
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
-    // =========================
-    // LOOP
-    // =========================
+
+        glfwSetWindowUserPointer(window, this);
+        glfwSetScrollCallback(window, scrollCallback);
+
+
+        glfwSetMouseButtonCallback(window, Screen2D::mouseButtonCallback);
+        glfwSetCursorPosCallback(window, Screen2D::cursorPositionCallback);
 
 }
+
+    static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
+        Screen2D* screen = static_cast<Screen2D*>(glfwGetWindowUserPointer(window));
+
+        if (yoffset > 0) {
+            std::cout << "Scroll pra cima\n";
+            screen->zoom += 0.05f;
+        }
+        else if (yoffset < 0) {
+            std::cout << "Scroll pra baixo\n";
+            std::cout << screen->position.print();
+            screen->zoom = fmax(0.0f, screen->zoom - 0.05f);
+        }
+    }
+
+    bool dragging = false;
+    double lastX = 0, lastY = 0;
+    Vector2D pos;
+
+    static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
+        Screen2D* screen = static_cast<Screen2D*>(glfwGetWindowUserPointer(window));
+        if (!screen) return;
+
+        if (button == GLFW_MOUSE_BUTTON_LEFT) {
+            if (action == GLFW_PRESS) {
+                screen->dragging = true;
+                glfwGetCursorPos(window, &screen->lastX, &screen->lastY);
+            }
+            else if (action == GLFW_RELEASE) {
+                screen->dragging = false;
+            }
+        }
+    }
+
+    static void cursorPositionCallback(GLFWwindow* window, double xpos, double ypos) {
+        Screen2D* screen = static_cast<Screen2D*>(glfwGetWindowUserPointer(window));
+        if (!screen || !screen->dragging) return;
+
+        double dx = xpos - screen->lastX;
+        double dy = ypos - screen->lastY;
+
+        screen-> position.components[0] += -dx / 100;
+        screen-> position.components[1]  += dy / 100;
+
+        screen->lastX = xpos;
+        screen->lastY = ypos;
+    }
+
     void loop() {
 
      while (!glfwWindowShouldClose(window)) {
@@ -124,13 +181,13 @@ void main()
          int width, height;
          glfwGetFramebufferSize(window, &width, &height);
 
-         float aspect = (float)width / (float)height;
+         const float aspect = (float)width / (float)height;
 
          glViewport(0, 0, width, height);
 
          glUseProgram(shaderProgram);
 
-         int aspectLoc = glGetUniformLocation(shaderProgram, "aspect");
+         const int aspectLoc = glGetUniformLocation(shaderProgram, "aspect");
          glUniform1f(aspectLoc, aspect);
 
 
@@ -152,9 +209,13 @@ void main()
 
     void renderLine(const Line& line) override {
 
+     const AbstractVector<2> p1 = (AbstractVector<2>(line.x1(), line.y1()) - position) * zoom;
+
+        const AbstractVector<2> p2 =  (AbstractVector<2>(line.x2(), line.y2()) - position) * zoom;
+
     const float vertices[] = {
-         line.x1(), line.y1(), 0.0f,
-         line.x2(), line.y2(), 0.0f
+        p1.getComponents()[0], p1.getComponents()[1], 0.0f,
+         p2.getComponents()[0], p2.getComponents()[1], 0.0f
      };
 
      glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -168,7 +229,7 @@ void main()
 
      glBindVertexArray(VAO);
      glDrawArrays(GL_LINES, 0, 2);
-     glLineWidth(line.thickness());
+     glLineWidth(fmin(line.thickness(), line.thickness() * zoom));
  }
 
 };

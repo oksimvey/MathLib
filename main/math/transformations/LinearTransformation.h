@@ -3,6 +3,7 @@
 
 #include "math/transformations/Transformation.h"
 
+#include <cmath>
 #include <string>
 
 #include "math/vectors/AbstractVector.h"
@@ -11,23 +12,28 @@
 
 #include <vector>
 
+#include <cassert>
+
 template <int input_dim, int output_dim>
 
 class LinearTransformation : public Transformation<input_dim, output_dim> {
 
   public:
 
-    static LinearTransformation identity(int dimension);
 
-    static LinearTransformation rotationMatrixByPlaneIndex(float theta,
-                                                           std::pair<int, int> plane);
                                                            
     std::array<AbstractVector<output_dim>, input_dim> basis;
 
     template <typename... Vectors>
-    LinearTransformation(const Vectors&... vectors) : basis{vectors...} {
+    explicit LinearTransformation(const Vectors&... vectors) : basis{vectors...} {
         static_assert(sizeof...(Vectors) == input_dim, "Wrong number of basis vectors");
     }
+
+    LinearTransformation() {
+        for (int i = 0; i < output_dim; i++)
+            basis[i] = AbstractVector<input_dim>();
+    }
+
     AbstractVector<output_dim>
     transform(const AbstractVector<input_dim>& vector) const override {
         AbstractVector<output_dim> toreturn;
@@ -52,7 +58,7 @@ class LinearTransformation : public Transformation<input_dim, output_dim> {
         std::array<AbstractVector<output_dim>, input_dim2> result;
 
         for (int i = 0; i < input_dim2; i++) {
-            result[i] = (*this) * transformation.getBasis()[i];
+            result[i] = *this * transformation.getBasis()[i];
         }
 
         return LinearTransformation<input_dim2, output_dim>(result);
@@ -111,7 +117,7 @@ class LinearTransformation : public Transformation<input_dim, output_dim> {
                 result += std::to_string(basis[col].getComponents()[row]);
 
                 if (col < input_dim - 1)
-                    result += " ";
+                    result += ", ";
             }
 
             result += " ]\n";
@@ -120,5 +126,51 @@ class LinearTransformation : public Transformation<input_dim, output_dim> {
         return result;
     }
 };
+
+
+template<int dimension>
+LinearTransformation<dimension, dimension> identity() {
+
+    LinearTransformation<dimension, dimension> result = LinearTransformation<dimension, dimension>();
+
+    for (int i = 0; i < dimension; i++) {
+        result.basis[i].components[i] = 1;
+    }
+
+    return result;
+}
+
+template<int dimension>
+LinearTransformation<dimension, dimension> rotationByPlaneIndex(const int& i, const int& j, const float& theta) {
+
+    assert(i >= 0 && i < dimension);
+    assert(j >= 0 && j < dimension);
+    assert(i != j);
+
+    LinearTransformation<dimension, dimension> result = identity<dimension>();
+    const float cosTheta = std::cos(theta);
+    const float sinTheta = std::sin(theta);
+    result.basis[i].components[i] = cosTheta;
+    result.basis[j].components[j] = cosTheta;
+    result.basis[i].components[j] = sinTheta;
+    result.basis[j].components[i] = -sinTheta;
+    return result;
+}
+
+LinearTransformation<2, 2> rotateIn2D(const float& theta) {
+    return rotationByPlaneIndex<2>(0, 1, theta);
+}
+
+LinearTransformation<3, 3> rotateInXAxis(const float& theta) {
+    return rotationByPlaneIndex<3>(1,2, theta);
+}
+
+LinearTransformation<3, 3> rotateInYAxis(const float& theta) {
+    return rotationByPlaneIndex<3>(0,2, theta);
+}
+
+LinearTransformation<3, 3> rotateInZAxis(const float& theta) {
+    return rotationByPlaneIndex<3>(0,1, theta);
+}
 
 #endif
