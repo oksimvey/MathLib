@@ -3,6 +3,9 @@
 #include "math/vectors/AbstractVector.h"
 #include "math/curves/Curve.h"
 
+#include <atomic>
+#include <thread>
+
 template <int dim>
 class AbstractScreen {
 
@@ -22,8 +25,14 @@ public:
     virtual void renderLine(const Line& line) = 0;
 
     void addLine(const Line& line) {
+
         lines.push_back(line);
+
+
+
     }
+
+    virtual void loop() = 0;
 
 
     void renderTriangle(const AbstractVector<dim>& vec1, const AbstractVector<dim>& vec2, const AbstractVector<dim>& vec3) const;

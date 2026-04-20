@@ -121,8 +121,10 @@ void main()
         glfwSetScrollCallback(window, scrollCallback);
 
 
-        glfwSetMouseButtonCallback(window, Screen2D::mouseButtonCallback);
-        glfwSetCursorPosCallback(window, Screen2D::cursorPositionCallback);
+        glfwSetMouseButtonCallback(window, mouseButtonCallback);
+        glfwSetCursorPosCallback(window, cursorPositionCallback);
+
+        glfwSwapInterval(2);
 
 }
 
@@ -130,13 +132,10 @@ void main()
         Screen2D* screen = static_cast<Screen2D*>(glfwGetWindowUserPointer(window));
 
         if (yoffset > 0) {
-            std::cout << "Scroll pra cima\n";
-            screen->zoom += 0.05f;
+            screen->zoom = fmin(screen-> zoom + 0.05f, 2);
         }
         else if (yoffset < 0) {
-            std::cout << "Scroll pra baixo\n";
-            std::cout << screen->position.print();
-            screen->zoom = fmax(0.0f, screen->zoom - 0.05f);
+            screen->zoom = fmax(0.25f, screen->zoom - 0.05f);
         }
     }
 
@@ -160,11 +159,11 @@ void main()
     }
 
     static void cursorPositionCallback(GLFWwindow* window, double xpos, double ypos) {
-        Screen2D* screen = static_cast<Screen2D*>(glfwGetWindowUserPointer(window));
+        auto* screen = static_cast<Screen2D*>(glfwGetWindowUserPointer(window));
         if (!screen || !screen->dragging) return;
 
-        double dx = xpos - screen->lastX;
-        double dy = ypos - screen->lastY;
+       float dx = xpos - screen->lastX;
+       float dy = ypos - screen->lastY;
 
         screen-> position.components[0] += -dx / 100;
         screen-> position.components[1]  += dy / 100;
@@ -173,7 +172,9 @@ void main()
         screen->lastY = ypos;
     }
 
-    void loop() {
+
+
+    void loop() override {
 
      while (!glfwWindowShouldClose(window)) {
 
@@ -192,10 +193,14 @@ void main()
 
 
          glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
+
+
+
          glClear(GL_COLOR_BUFFER_BIT);
 
+
          for (const Line& line : lines) {
-             renderLine(line);
+                 renderLine(line);
          }
 
          glfwSwapBuffers(window);

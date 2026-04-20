@@ -17,6 +17,7 @@ add_executable(MathLib_main
         main/rendering/screen/AbstractScreen.h
         main/rendering/screen/Screen2D.h
         main/rendering/Line.h
+        main/math/calculus/Derivation.h
 )
 
 target_include_directories(MathLib_main PRIVATE
