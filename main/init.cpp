@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include "rendering/screen/Screen2D.h"
 
 // shaders
 const char* vertexShaderSource = R"(
@@ -29,6 +30,21 @@ void main()
 )";
 
 int main() {
+
+    auto screen = Screen2D(800, 600, Vector2D(0, 0));
+    screen.init();
+    screen.addLine(Line(0.5, 0.5, 0.5, -0.5, 1, 0, 1, 1, 5));
+    screen.addLine(Line(-0.5, 0.5, 0.5, 0.5, 0, 1, 1, 1, 5));
+
+    screen.addLine(Line(-0.5, -0.5, 0.5, -0.5, 1, 0, 0, 1, 5));
+
+
+    screen.addLine(Line(-0.5, 0.5, -0.5, -0.5, 0, 0, 1, 1, 5));
+    screen.loop();
+
+    return 0;
+}
+ /*
     glfwInit();
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -127,5 +143,4 @@ int main() {
     }
 
     glfwTerminate();
-    return 0;
-}
+    */

@@ -7,10 +7,6 @@ add_executable(MathLib_main
         glad/src/glad.c
         main/init.cpp
 
-        main/math/calculus/Derivation.cpp
-        main/math/calculus/Integration.cpp
-        main/math/curves/BezierCurve.cpp
-        main/math/curves/Curve.cpp
         main/math/MathUtils.cpp
         main/physics/AbstractPhysicsInstance.cpp
         main/rendering/screen/Screen3D.cpp
@@ -20,6 +16,7 @@ add_executable(MathLib_main
         main/math/vectors/Vector2D.h
         main/rendering/screen/AbstractScreen.h
         main/rendering/screen/Screen2D.h
+        main/rendering/Line.h
 )
 
 target_include_directories(MathLib_main PRIVATE

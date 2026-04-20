@@ -2,6 +2,7 @@
 #define VECTOR2D_H
 
 #include "AbstractVector.h"
+#include "math/ComplexNumber.h"
 
 class Vector2D : public AbstractVector<2> {
 
@@ -18,6 +19,14 @@ class Vector2D : public AbstractVector<2> {
     explicit Vector2D(const ComplexNumber number) {
         components[0] = number.real();
         components[1] = number.imag();
+    }
+
+    float x() const {
+        return components[0];
+    }
+
+    float y() const {
+        return components[1];
     }
 
 
