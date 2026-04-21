@@ -2,9 +2,9 @@
 #define ABSTRACTSCREEN_H
 #include "math/vectors/AbstractVector.h"
 #include "math/curves/Curve.h"
+#include "math/vectors/Vector2D.h"
 
-#include <atomic>
-#include <thread>
+#include <GLFW/glfw3.h>
 
 template <int dim>
 class AbstractScreen {
@@ -15,13 +15,14 @@ public:
 
     std::vector<Curve<dim>> curves;
 
-        int width_, height_;
-        AbstractVector<dim> position;
+    int width_, height_;
 
-        AbstractScreen(int width, int height, AbstractVector<dim> pos)
+    AbstractVector<dim> position;
+
+    AbstractScreen(int width, int height, AbstractVector<dim> pos)
             : width_(width), height_(height), position(pos) {}
 
-        virtual void init() = 0;
+    virtual void init() = 0;
 
 
     virtual void renderLine(const Line& line) = 0;
@@ -38,6 +39,7 @@ public:
 
     virtual float getLodFactor() const = 0;
 
+    Vector2D projectVertex(const AbstractVector<dim>& vec) const;
 
     void renderTriangle(const AbstractVector<dim>& vec1, const AbstractVector<dim>& vec2, const AbstractVector<dim>& vec3) const;
 
@@ -45,11 +47,13 @@ public:
 
     void renderCurve(const Curve<dim>& curve) {
 
-        const int nodes = curve.nodes *(getLodFactor());
+        const int nodes = curve.nodes * getLodFactor();
+
+        float time = glfwGetTime();
 
         for (int i = 0; i < nodes; i++) {
-            const float t1 = curve.t0 + (curve.t1 - curve.t0) * static_cast<float>(i) / static_cast<float>(nodes);
-            const float t2 = curve.t0 + (curve.t1 - curve.t0) * static_cast<float>(i + 1) / static_cast<float>(nodes);
+            const float t1 = curve.t0 + (curve.getT(time) - curve.t0) * static_cast<float>(i) / static_cast<float>(nodes);
+            const float t2 = curve.t0 + (curve.getT(time) - curve.t0) * static_cast<float>(i + 1) / static_cast<float>(nodes);
             float x = curve.getPoint(t1).getComponents()[0];
             float y = curve.getPoint(t1).getComponents()[1];
             float x2 = curve.getPoint(t2).getComponents()[0];

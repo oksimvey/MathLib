@@ -50,18 +50,21 @@ class LinearTransformation : public Transformation<input_dim, output_dim> {
     AbstractVector<output_dim> operator*(const AbstractVector<input_dim>& vector) const {
         return transform(vector);
     }
-    
-    template <int input_dim2>
-    LinearTransformation<input_dim2, output_dim>
-    operator*(const LinearTransformation<input_dim2, input_dim>& transformation) const {
 
-        std::array<AbstractVector<output_dim>, input_dim2> result;
+    LinearTransformation operator*(const LinearTransformation& transformation) const {
 
-        for (int i = 0; i < input_dim2; i++) {
-            result[i] = *this * transformation.getBasis()[i];
+        LinearTransformation result;
+
+        result.inDim = transformation.inDim;
+        result.outDim = this->outDim;
+
+        result.basis.resize(result.inDim);
+
+        for (int i = 0; i < result.inDim; i++) {
+            result.basis[i] = *this * transformation.basis[i];
         }
 
-        return LinearTransformation<input_dim2, output_dim>(result);
+        return result;
     }
 
     LinearTransformation operator/(const LinearTransformation& transformation) const;
@@ -157,19 +160,19 @@ LinearTransformation<dimension, dimension> rotationByPlaneIndex(const int& i, co
     return result;
 }
 
-LinearTransformation<2, 2> rotateIn2D(const float& theta) {
+LinearTransformation<2, 2> rotationIn2D(const float& theta) {
     return rotationByPlaneIndex<2>(0, 1, theta);
 }
 
-LinearTransformation<3, 3> rotateInXAxis(const float& theta) {
+LinearTransformation<3, 3> rotationInXAxis(const float& theta) {
     return rotationByPlaneIndex<3>(1,2, theta);
 }
 
-LinearTransformation<3, 3> rotateInYAxis(const float& theta) {
+LinearTransformation<3, 3> rotationInYAxis(const float& theta) {
     return rotationByPlaneIndex<3>(0,2, theta);
 }
 
-LinearTransformation<3, 3> rotateInZAxis(const float& theta) {
+LinearTransformation<3, 3> rotationInZAxis(const float& theta) {
     return rotationByPlaneIndex<3>(0,1, theta);
 }
 

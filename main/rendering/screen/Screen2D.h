@@ -1,10 +1,9 @@
 #ifndef SCREEN2D_H
 #define SCREEN2D_H
 
-#include "math/transformations/LinearTransformation.h"
-#include "math/vectors/Vector2D.h"
 #include "math/curves/Curve.h"
 #include "math/vectors/AbstractVector.h"
+#include "math/vectors/Vector2D.h"
 #include "rendering/Line.h"
 #include "rendering/screen/AbstractScreen.h"
 #include <GLFW/glfw3.h>
@@ -136,7 +135,7 @@ void init() override {
     glfwSetMouseButtonCallback(window, mouseButtonCallback);
     glfwSetCursorPosCallback(window, cursorPositionCallback);
 
-    glfwSwapInterval(2);
+    glfwSwapInterval(5);
 }
 
     static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset) {

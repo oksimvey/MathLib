@@ -18,35 +18,40 @@ public:
     const float startValue;
     const float endValue;
     const Easing::EasingType easingType;
+    const float delay;
 
     TimeParameter(const bool& repeat,
                   const float& duration,
                   const float& startValue,
                   const float& endValue,
                   const Easing::EasingType& type,
-                  const float& startTime)
+                  const float& startTime,
+                  const float& delay)
        : shouldRepeat(repeat),
          startTime(startTime),
          duration(duration),
          startValue(startValue),
          endValue(endValue),
-         easingType(type)
+         easingType(type),
+    delay(delay)
     {}
+    float getCurrentValue(const float& time) const {
+        float realtime = time - (startTime+delay);
 
-    float getCurrentValue(const float& time) {
-        float realtime = time - startTime;
+        if (realtime < 0) {
+            return startValue;
+        }
 
-        if (realtime > duration) {
-            if (shouldRepeat) {
-                startTime = time;
-                realtime = 0;
-            }
-            else {
+        if (shouldRepeat) {
+            realtime = fmod(realtime, duration);
+        }
+        else {
+            if (realtime > duration) {
                 return endValue;
             }
         }
 
-        const float dt = realtime / duration; // normaliza 0..1
+        const float dt = realtime / duration;
         const float easedTime = Easing::interpolate(easingType, dt);
 
         return startValue * (1.0f - easedTime) + endValue * easedTime;
