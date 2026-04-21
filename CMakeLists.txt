@@ -11,8 +11,6 @@ add_executable(MathLib_main
         main/physics/AbstractPhysicsInstance.cpp
         main/rendering/RenderingUtils.cpp
         main/math/transformations/LinearTransformation.h
-        main/math/vectors/Vector3D.h
-        main/math/vectors/Vector2D.h
         main/rendering/screen/AbstractScreen.h
         main/rendering/screen/Screen2D.h
         main/rendering/Line.h
@@ -20,6 +18,7 @@ add_executable(MathLib_main
         main/math/parameters/TimeParameter.h
         main/math/easing/EasingStyle.h
         main/rendering/screen/Screen3D.h
+        main/key/KeyInputHandler.h
 )
 
 target_include_directories(MathLib_main PRIVATE

@@ -5,25 +5,23 @@
 
 #include <cmath>
 #include <string>
-
 #include "math/vectors/AbstractVector.h"
-
 #include "math/ComplexNumber.h"
-
 #include <vector>
-
 #include <cassert>
 
+// intput dim is the number of columns/vectors
+// output dim is the number of lines/dim of the basis vectors
 template <int input_dim, int output_dim>
 
 class LinearTransformation : public Transformation<input_dim, output_dim> {
 
   public:
 
-
-                                                           
+    // the basis vectors/colum vectors of the linear transformation
     std::array<AbstractVector<output_dim>, input_dim> basis;
 
+    // constructors
     template <typename... Vectors>
     explicit LinearTransformation(const Vectors&... vectors) : basis{vectors...} {
         static_assert(sizeof...(Vectors) == input_dim, "Wrong number of basis vectors");
@@ -34,18 +32,60 @@ class LinearTransformation : public Transformation<input_dim, output_dim> {
             basis[i] = AbstractVector<input_dim>();
     }
 
+    // getters
+    std::vector<AbstractVector<output_dim>> getBasis() const {
+        return basis;
+    }
+
+    static int lines() {
+        return output_dim;
+    }
+
+    static int columns() {
+        return input_dim;
+    }
+
+    // basic matrix arithmetic operations
+
+    LinearTransformation operator*(const float& scalar) const {
+        LinearTransformation result;
+        result.basis = basis;
+        for (int i = 0; i < input_dim; i++) {
+            result.basis[i] = result.basis[i] * scalar;
+        }
+        return result;
+    }
+
+    LinearTransformation operator/(const float& scalar) const {
+        LinearTransformation result;
+        result.basis = basis;
+        for (int i = 0; i < input_dim; i++) {
+            result.basis[i] = result.basis[i] / scalar;
+        }
+        return result;
+    }
+
+    LinearTransformation operator+(const LinearTransformation& transformation) const;
+
+    LinearTransformation operator+(const float& number) const;
+
+    LinearTransformation operator-(const LinearTransformation& transformation) const;
+
+    LinearTransformation operator-(const float& number) const;
+
+
+    // matrix operations
+
     AbstractVector<output_dim>
     transform(const AbstractVector<input_dim>& vector) const override {
+        assert(vector.getDimension() == input_dim);
         AbstractVector<output_dim> toreturn;
         for (int i = 0; i < input_dim; i++) {
-            toreturn = toreturn + (basis[i] * vector.getComponents()[i]);
+            toreturn = toreturn + basis[i] * vector.getComponents()[i];
         }
         return toreturn;
     }
 
-    LinearTransformation operator*(const float& scalar) const;
-
-    LinearTransformation operator/(const float& scalar) const;
 
     AbstractVector<output_dim> operator*(const AbstractVector<input_dim>& vector) const {
         return transform(vector);
@@ -55,46 +95,45 @@ class LinearTransformation : public Transformation<input_dim, output_dim> {
 
         LinearTransformation result;
 
-        result.inDim = transformation.inDim;
-        result.outDim = this->outDim;
+        result.inDim = transformation.getInputDimension();
+        result.outDim = this-> getOutputDimension();
 
-        result.basis.resize(result.inDim);
+        result.basis.resize(result.getInputDimension());
 
-        for (int i = 0; i < result.inDim; i++) {
+        for (int i = 0; i < result.getInputDimension(); i++) {
             result.basis[i] = *this * transformation.basis[i];
         }
 
         return result;
     }
 
-    LinearTransformation operator/(const LinearTransformation& transformation) const;
+    LinearTransformation operator^(const int& expoent) const;
 
-    LinearTransformation operator+(const AbstractVector<input_dim>& vector) const;
+    LinearTransformation operator/(const LinearTransformation& transformation) {
+        return *this * transformation.inverse();
+    }
 
-    LinearTransformation operator+(const LinearTransformation& transformation) const;
+    LinearTransformation exp() const;
 
-    LinearTransformation operator+(const float& number) const;
+    bool isOrthonormal() const;
 
-    LinearTransformation operator-(const AbstractVector<input_dim>& vector) const;
-
-    LinearTransformation
-    operator-(const LinearTransformation<input_dim, output_dim>& transformation) const;
-
-    LinearTransformation operator-(const ComplexNumber& number) const;
-
-    LinearTransformation operator-(const float& number) const;
-
-    std::vector<AbstractVector<output_dim>> kerr() const;
+    float trace() const;
 
     std::vector<AbstractVector<output_dim>> im() const;
 
-    std::vector<AbstractVector<output_dim>> getBasis() const;
+    std::vector<AbstractVector<output_dim>> kerr() const;
+
+    int null() const;
+
+    int rank() const;
 
     LinearTransformation transpose() const;
 
-    LinearTransformation inverse() const;
+    float det() const;
 
-    float trace() const;
+    LinearTransformation adjoint() const;
+
+    LinearTransformation inverse() const;
 
     std::vector<float> eigenValues() const;
 
@@ -102,13 +141,6 @@ class LinearTransformation : public Transformation<input_dim, output_dim> {
 
     LinearTransformation diagonalize() const;
 
-    int null() const;
-
-    int rank() const;
-
-    float det() const;
-
-    bool isOrtonormal() const;
 
     std::string print() const {
         std::string result;
@@ -142,6 +174,9 @@ LinearTransformation<dimension, dimension> identity() {
 
     return result;
 }
+
+template<int dimension>
+LinearTransformation<dimension, dimension> antissymetric(const AbstractVector<dimension>& vector){}
 
 template<int dimension>
 LinearTransformation<dimension, dimension> rotationByPlaneIndex(const int& i, const int& j, const float& theta) {

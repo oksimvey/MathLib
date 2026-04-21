@@ -3,7 +3,6 @@
 
 #include "math/curves/Curve.h"
 #include "math/vectors/AbstractVector.h"
-#include "math/vectors/Vector2D.h"
 #include "rendering/Line.h"
 #include "rendering/screen/AbstractScreen.h"
 #include <GLFW/glfw3.h>
@@ -17,12 +16,12 @@ public:
 
     float zoom = 1.0f;
 
-    Vector2D position;
+    AbstractVector<2> position;
 
-    Screen2D(const int w, const int h, const Vector2D pos)
-        : AbstractScreen(w, h) {
-        position = pos;
-    }
+
+    Screen2D(const int width, const int height, const std::array<TimeParameter, 4>& color, const AbstractVector<2> pos)
+            : AbstractScreen(width, height, color), position(pos) {}
+
 
     GLFWwindow* window;
 
@@ -149,7 +148,7 @@ void init() override {
             screen->zoom = fmin(screen-> zoom + 0.05f, 2);
         }
         else if (yoffset < 0) {
-            screen->zoom = fmax(0.1f, screen->zoom - 0.05f);
+            screen->zoom = fmax(0.05f, screen->zoom - 0.05f);
         }
     }
 
@@ -204,8 +203,11 @@ void init() override {
          const int aspectLoc = glGetUniformLocation(shaderProgram, "aspect");
          glUniform1f(aspectLoc, aspect);
 
+         const float& tick = glfwGetTime();
 
-         glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
+
+         glClearColor(screencol[0].getCurrentValue(tick),
+             screencol[1].getCurrentValue(tick), screencol[2].getCurrentValue(tick), screencol[3].getCurrentValue(tick));
 
 
 
@@ -229,12 +231,10 @@ void init() override {
 
 
 float getLodFactor() const override {
-        return zoom;
+        return std::fmax(0.025f, exp(-zoom*4));
     }
 
     void renderLine(const Line& line) override {
-
-        position = Vector2D(curves[0].getPoint(curves[0].getT(glfwGetTime())));
 
      const AbstractVector<2> p1 = (AbstractVector<2>(line.x1(), line.y1()) - position) * zoom;
 

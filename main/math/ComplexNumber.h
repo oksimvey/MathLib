@@ -11,14 +11,14 @@
 
 class ComplexNumber {
 
-  private:
     // real and imaginary parts
     float real_;
     float imag_;
 
   public:
+
     // constructors
-    ComplexNumber(float real, float imag) : real_(real), imag_(imag) {
+    ComplexNumber(const float& real, const float& imag) : real_(real), imag_(imag) {
     }
 
     ComplexNumber(const ComplexNumber& number) = default;
@@ -54,7 +54,7 @@ class ComplexNumber {
 
         if (*this == 0)
             return ComplexNumber(0, 0);
-        return *this ^ (ComplexNumber(0.5, 0));
+        return *this ^ ComplexNumber(0.5, 0);
     }
 
     // basic operations
@@ -62,20 +62,36 @@ class ComplexNumber {
         return ComplexNumber(real_ + o.real_, imag_ + o.imag_);
     }
 
+    ComplexNumber operator+=(const ComplexNumber& o) const {
+        return *this + o;
+    }
+
     ComplexNumber operator+(const float& scalar) const {
         return ComplexNumber(real_ + scalar, imag_);
+    }
+
+    ComplexNumber operator+=(const float& scalar) const {
+        return *this + scalar;
     }
 
     ComplexNumber operator-(const ComplexNumber& o) const {
         return ComplexNumber(real_ - o.real_, imag_ - o.imag_);
     }
 
+    ComplexNumber operator-=(const ComplexNumber& o) const {
+        return *this - o;
+    }
+
     ComplexNumber operator-(const float& scalar) const {
         return ComplexNumber(real_ - scalar, imag_);
     }
 
+    ComplexNumber operator-=(const float& scalar) const {
+        return *this - scalar;
+    }
+
     ComplexNumber operator-() const {
-        return *this * (-1);
+        return *this * -1;
     }
 
     // multiply from (a + bi)(c + di) = ac + adi + cbi + bdi^2 = ac - bd + i(ad
@@ -85,14 +101,22 @@ class ComplexNumber {
                              real_ * o.imag_ + imag_ * o.real_);
     }
 
+    ComplexNumber operator*=(const ComplexNumber& o) const {
+        return *this * o;
+    }
+
     ComplexNumber operator*(const float& scalar) const {
         return ComplexNumber(scalar * real_, scalar * imag_);
+    }
+
+    ComplexNumber operator*=(const float& scalar) const {
+        return *this * scalar;
     }
 
     // from (a + bi)/(c + di) = (a+bi)(c-di)/(c+di)(c-di) = ((ac + bd) + i(bc -
     // ad))/(c^2 + d^2)
     ComplexNumber operator/(const ComplexNumber& o) const {
-        float denom = o.real_ * o.real_ + o.imag_ * o.imag_;
+        const float& denom = o.real_ * o.real_ + o.imag_ * o.imag_;
 
         if (MathUtils::isNearZero(denom))
             throw std::runtime_error("Division by zero");
@@ -101,10 +125,18 @@ class ComplexNumber {
                              (imag_ * o.real_ - real_ * o.imag_) / denom);
     }
 
+    ComplexNumber operator/=(const ComplexNumber& o) const {
+        return *this / o;
+    }
+
     ComplexNumber operator/(const float& scalar) const {
         if (MathUtils::isNearZero(scalar))
             throw std::runtime_error("Division by zero");
         return ComplexNumber(real_ / scalar, imag_ / scalar);
+    }
+
+    ComplexNumber operator/=(const float& scalar) const {
+        return *this / scalar;
     }
 
     // compares complex numbers by checking if they abs difference is < EPS
@@ -127,7 +159,7 @@ class ComplexNumber {
 
     // exp by e^(a + bi) = (e^a)(e^bi) = (e^a)(cosb + isinb)
     ComplexNumber exp() const {
-        float e = std::exp(real_);
+        const float& e = std::exp(real_);
         return ComplexNumber(e * std::cos(imag_), e * std::sin(imag_));
     }
 
@@ -138,7 +170,7 @@ class ComplexNumber {
 
     // by ln(re^iθ) = ln(r) + ln(e^iθ) = ln(r) + iθ = ln(mod(z)) + iarg(z)
     ComplexNumber ln() const {
-        float r = mod();
+        const float& r = mod();
 
         if (MathUtils::isNearZero(r))
             throw std::runtime_error("ln(0) undefined");
@@ -174,8 +206,8 @@ class ComplexNumber {
     // then use the standard inversion identity for cosine:
     // cos(w) = z  <=>  w = -i ln(z + sqrt(z^2 - 1))
     ComplexNumber arccos() const {
-        ComplexNumber i(0, 1);
-        ComplexNumber one(1, 0);
+        const ComplexNumber i(0, 1);
+        const ComplexNumber one(1, 0);
 
         return (-i) * ((*this) + ((*this) * (*this) - one).sqrt()).ln();
     }
@@ -185,8 +217,8 @@ class ComplexNumber {
     // sin(w) = (e^{iw} - e^{-iw}) / (2i)
     // which gives w = -i ln(iz + sqrt(1 - z^2))
     ComplexNumber arcsin() const {
-        ComplexNumber i(0, 1);
-        ComplexNumber one(1, 0);
+        const ComplexNumber i(0, 1);
+        const ComplexNumber one(1, 0);
 
         return (-i) * (i * (*this) + (one - (*this) * (*this)).sqrt()).ln();
     }
@@ -196,8 +228,8 @@ class ComplexNumber {
     // and the exponential forms of sine and cosine
     // this rearranges to w = (i/2) ln((1 - iz)/(1 + iz))
     ComplexNumber arctan() const {
-        ComplexNumber i(0, 1);
-        ComplexNumber one(1, 0);
+        const ComplexNumber i(0, 1);
+        const ComplexNumber one(1, 0);
 
         return (i / 2.0) * ((one - i * (*this)) / (one + i * (*this))).ln();
     }
@@ -241,7 +273,7 @@ class ComplexNumber {
     // using sinh(w) = (e^w - e^{-w})/2
     // which rearranges to w = ln(z + sqrt(z^2 + 1))
     ComplexNumber arcsinh() const {
-        ComplexNumber one(1, 0);
+        const ComplexNumber one(1, 0);
         return ((*this) + ((*this) * (*this) + one).sqrt()).ln();
     }
 
@@ -251,24 +283,25 @@ class ComplexNumber {
     // getting e^{2w} = (1+z)/(1-z)
     // so w = (1/2)ln((1+z)/(1-z))
     ComplexNumber arctanh() const {
-        ComplexNumber one(1, 0);
+        const ComplexNumber one(1, 0);
 
         return ((one + (*this)) / (one - (*this))).ln() / 2.0;
     }
 
+    // prints the number in its cartesian form a + bi
     std::string printInCartesianForm() const {
 
         if (MathUtils::isNearZero(imag_))
             return std::to_string(real_);
 
-        else if (imag_ > 0)
+        if (imag_ > 0)
             return std::to_string(real_) + " + " + std::to_string(imag_) + "i";
 
         return std::to_string(real_) + " - " + std::to_string(-imag_) + "i";
     }
 
 
-
+    // prints the number in its polar form re^iθ
     std::string printInPolarForm() const {
         return std::to_string(mod()) + "e^i" + std::to_string(arg());
     }

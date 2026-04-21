@@ -14,17 +14,20 @@ class Curve {
     public:
      float t0;
 
-    TimeParameter parameter;
+    TimeParameter T;
+
 
     int nodes;
 
-    Curve(float t0, const TimeParameter& parameter_, int nodes) : parameter(parameter_) {
+    std::vector<TimeParameter> parameters;
+
+    Curve(float t0, const TimeParameter& parameter_, int nodes, const std::vector<TimeParameter>& params) : T(parameter_), parameters(params) {
         this->t0 = t0;
         this->nodes = nodes;
     }
 
     float getT(const float& time) const {
-        return parameter.getCurrentValue(time);
+        return T.getCurrentValue(time);
     }
 
 

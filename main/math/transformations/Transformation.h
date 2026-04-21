@@ -3,11 +3,15 @@
 
 #include "math/vectors/AbstractVector.h"
 
+
+// input dim is the dimension of the vectors to be transformed
+// output dim is the dimension of the transformed vectors
 template <int input_dim, int output_dim>
 
 class Transformation {
 
   public:
+
     virtual ~Transformation() = default;
 
     virtual AbstractVector<output_dim>

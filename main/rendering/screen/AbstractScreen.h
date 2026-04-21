@@ -2,7 +2,7 @@
 #define ABSTRACTSCREEN_H
 #include "math/vectors/AbstractVector.h"
 #include "math/curves/Curve.h"
-#include "math/vectors/Vector2D.h"
+#include "math/parameters/TimeParameter.h"
 
 #include <GLFW/glfw3.h>
 
@@ -15,10 +15,15 @@ public:
 
     std::vector<Curve<dim>> curves;
 
+    std::array<TimeParameter, 4> screencol;
+
+
     int width_, height_;
 
-    AbstractScreen(const int width, const int height)
-            : width_(width), height_(height) {}
+    AbstractScreen(const int width, const int height, const std::array<TimeParameter, 4>& color)
+            : screencol(color), width_(width), height_(height) {}
+
+
 
     virtual void init() = 0;
 
@@ -37,7 +42,7 @@ public:
 
     virtual float getLodFactor() const = 0;
 
-    Vector2D projectVertex(const AbstractVector<dim>& vec) const;
+    std::array<float, 2> projectVertex(const AbstractVector<dim>& vec) const;
 
     void renderTriangle(const AbstractVector<dim>& vec1, const AbstractVector<dim>& vec2, const AbstractVector<dim>& vec3) const;
 
@@ -45,7 +50,7 @@ public:
 
     void renderCurve(const Curve<dim>& curve) {
 
-        const int nodes = curve.nodes * getLodFactor();
+        const int nodes = curve.nodes *(1 - getLodFactor());
 
         float time = glfwGetTime();
 
