@@ -1,22 +1,32 @@
 #ifndef CURVE_H
 #define CURVE_H
 
+#include "math/vectors/AbstractVector.h"
+
+#include <array>
+
+#include <functional>
+
 template <int dim>
 class Curve {
 
     public:
 
-    Curve();
+    float t0, t1;
 
-    virtual AbstractVector<dim> getPoint(float t) = 0;
+    int nodes;
 
-    virtual std::array<float, 4> getColor(float t) = 0;
+    Curve(float t0, float t1, int nodes) {
+        this->t0 = t0;
+        this->t1 = t1;
+        this->nodes = nodes;
+    }
 
-    virtual AbstractVector<dim> getTangent(float t) = 0;
 
-    virtual AbstractVector<dim> getNormal(float t) = 0;
+    std::function<AbstractVector<dim>(float)> getPoint;
+    std::function<std::array<float,4>(float)> getColor;
 
-    virtual float getLength() = 0;
+
 
 
 

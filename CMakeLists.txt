@@ -18,6 +18,8 @@ add_executable(MathLib_main
         main/rendering/screen/Screen2D.h
         main/rendering/Line.h
         main/math/calculus/Derivation.h
+        main/math/parameters/TimeParameter.h
+        main/math/easing/EasingStyle.h
 )
 
 target_include_directories(MathLib_main PRIVATE

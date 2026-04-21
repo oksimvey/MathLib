@@ -3,6 +3,7 @@
 
 #include "math/transformations/LinearTransformation.h"
 #include "math/vectors/Vector2D.h"
+#include "math/curves/Curve.h"
 #include "math/vectors/AbstractVector.h"
 #include "rendering/Line.h"
 #include "rendering/screen/AbstractScreen.h"
@@ -10,6 +11,7 @@
 #include <cmath>
 #include <glad/glad.h>
 #include <iostream>
+
 class Screen2D : public AbstractScreen<2> {
 
 public:
@@ -28,8 +30,7 @@ public:
     {
         glViewport(0, 0, w, h);
     }
-
- void init() override {
+void init() override {
 
     glfwInit();
 
@@ -37,9 +38,12 @@ public:
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+    // 🔥 ANTI-ALIASING (tem que ser ANTES da janela)
+    glfwWindowHint(GLFW_SAMPLES, 4);
+
     window = glfwCreateWindow(width_, height_, "OpenGL Window", NULL, NULL);
 
-        glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
     if (!window) {
         std::cout << "Failed to create window\n";
@@ -55,24 +59,30 @@ public:
     }
 
     // =========================
+    // RENDER SETTINGS (DEPOIS DO GLAD)
+    // =========================
+
+    glEnable(GL_MULTISAMPLE); // 🔥 ativa MSAA de fato
+
+    glEnable(GL_BLEND); // útil pra transparência e efeitos
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    // =========================
     // SHADERS
     // =========================
 
     const char* vertexShaderSource = R"(
-   #version 330 core
-layout(location = 0) in vec3 aPos;
+    #version 330 core
+    layout(location = 0) in vec3 aPos;
 
-uniform float aspect;
+    uniform float aspect;
 
-void main()
-{
-    vec2 pos = aPos.xy;
-
-    pos.x /= aspect;
-
-    gl_Position = vec4(pos, 0.0, 1.0);
-}
-
+    void main()
+    {
+        vec2 pos = aPos.xy;
+        pos.x /= aspect;
+        gl_Position = vec4(pos, 0.0, 1.0);
+    }
     )";
 
     const char* fragmentShaderSource = R"(
@@ -116,16 +126,17 @@ void main()
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
+    // =========================
+    // INPUT CALLBACKS
+    // =========================
 
-        glfwSetWindowUserPointer(window, this);
-        glfwSetScrollCallback(window, scrollCallback);
+    glfwSetWindowUserPointer(window, this);
 
+    glfwSetScrollCallback(window, scrollCallback);
+    glfwSetMouseButtonCallback(window, mouseButtonCallback);
+    glfwSetCursorPosCallback(window, cursorPositionCallback);
 
-        glfwSetMouseButtonCallback(window, mouseButtonCallback);
-        glfwSetCursorPosCallback(window, cursorPositionCallback);
-
-        glfwSwapInterval(2);
-
+    glfwSwapInterval(2);
 }
 
     static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
@@ -135,7 +146,7 @@ void main()
             screen->zoom = fmin(screen-> zoom + 0.05f, 2);
         }
         else if (yoffset < 0) {
-            screen->zoom = fmax(0.25f, screen->zoom - 0.05f);
+            screen->zoom = fmax(0.1f, screen->zoom - 0.05f);
         }
     }
 
@@ -162,11 +173,11 @@ void main()
         auto* screen = static_cast<Screen2D*>(glfwGetWindowUserPointer(window));
         if (!screen || !screen->dragging) return;
 
-       float dx = xpos - screen->lastX;
-       float dy = ypos - screen->lastY;
-
-        screen-> position.components[0] += -dx / 100;
-        screen-> position.components[1]  += dy / 100;
+        const float& dx = xpos - screen->lastX;
+        const float& dy = ypos - screen->lastY;
+        const float& divisor = 250 * screen->zoom;
+        screen-> position.components[0] += -dx / divisor;
+        screen-> position.components[1]  += dy / divisor;
 
         screen->lastX = xpos;
         screen->lastY = ypos;
@@ -203,6 +214,10 @@ void main()
                  renderLine(line);
          }
 
+         for (const Curve<2>& curve : curves) {
+             renderCurve(curve);
+         }
+
          glfwSwapBuffers(window);
          glfwPollEvents();
      }
@@ -211,6 +226,9 @@ void main()
  }
 
 
+float getLodFactor() const override {
+        return zoom;
+    }
 
     void renderLine(const Line& line) override {
 

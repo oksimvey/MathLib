@@ -5,9 +5,7 @@
 #include <cmath>
 #include <iostream>
 
-static AbstractVector<2> f(const float x) {
-    return AbstractVector<2>(cos(x)+x-M_PI/2,1-sin(2*x));
-}
+
 
 int main() {
 
@@ -18,23 +16,24 @@ int main() {
     screen2_d.addLine(Line(-100, 0, 100, 0, 1, 1, 1, 1, 5));
     screen2_d.addLine(Line(0, -100, 0, 100, 1, 1, 1, 1, 5));
 
-    float a = -10;
-    float b = 10;
-    int steps = 100;
-
-    for (int i = 0; i < steps; i++) {
-        const float t1 = a + (b - a) * static_cast<float>(i) / static_cast<float>(steps);
-        const float t2 = a + (b - a) * static_cast<float>(i + 1) / static_cast<float>(steps);
-        float x = f(t1).getComponents()[0];
-        float y = f(t1).getComponents()[1];
-        float x2 = f(t2).getComponents()[0];
-        float y2 = f(t2).getComponents()[1];
-
-
-
-        screen2_d.addLine(Line(x, y, x2, y2, 1, 1, 1, 1, 5));
-
+    for (int i = -25; i < 25; i++) {
+        screen2_d.addLine(Line(i, -0.1f, i, 0.1f, 1, 1, 1, 1, 5));
+        screen2_d.addLine(Line(-0.1f, i, 0.1f, i, 1, 1, 1, 1, 5));
     }
+
+    auto curve = Curve<2>(0, M_PI*2, 100);
+
+    curve.getPoint = [](const float t) {
+        return AbstractVector<2>{cos(t), sin(t)};
+    };
+
+    curve.getColor = [](float t) -> std::array<float, 4> {
+        float p = t / (M_PI * 4);
+        return std::array<float, 4>{0.75, 0.33f + p,1, 1};
+    };
+
+    screen2_d.addCurve(curve);
+
     screen2_d.loop();
 
 
