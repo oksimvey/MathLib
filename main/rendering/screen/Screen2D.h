@@ -17,8 +17,12 @@ public:
 
     float zoom = 1.0f;
 
-    Screen2D(const int w, const int h, const AbstractVector<2> pos)
-        : AbstractScreen(w, h, pos) {}
+    Vector2D position;
+
+    Screen2D(const int w, const int h, const Vector2D pos)
+        : AbstractScreen(w, h) {
+        position = pos;
+    }
 
     GLFWwindow* window;
 
@@ -151,7 +155,6 @@ void init() override {
 
     bool dragging = false;
     double lastX = 0, lastY = 0;
-    Vector2D pos;
 
     static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
         Screen2D* screen = static_cast<Screen2D*>(glfwGetWindowUserPointer(window));
@@ -230,6 +233,8 @@ float getLodFactor() const override {
     }
 
     void renderLine(const Line& line) override {
+
+        position = Vector2D(curves[0].getPoint(curves[0].getT(glfwGetTime())));
 
      const AbstractVector<2> p1 = (AbstractVector<2>(line.x1(), line.y1()) - position) * zoom;
 

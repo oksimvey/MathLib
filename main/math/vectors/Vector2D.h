@@ -15,6 +15,11 @@ class Vector2D : public AbstractVector<2> {
     Vector2D() : Vector2D(0, 0) {
     }
 
+    explicit Vector2D(const AbstractVector vec) {
+        components[0] = vec.components[0];
+        components[1] = vec.components[1];
+    }
+
     float x() const {
         return components[0];
     }

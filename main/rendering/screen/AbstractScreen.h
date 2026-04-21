@@ -17,10 +17,8 @@ public:
 
     int width_, height_;
 
-    AbstractVector<dim> position;
-
-    AbstractScreen(int width, int height, AbstractVector<dim> pos)
-            : width_(width), height_(height), position(pos) {}
+    AbstractScreen(const int width, const int height)
+            : width_(width), height_(height) {}
 
     virtual void init() = 0;
 
@@ -50,6 +48,7 @@ public:
         const int nodes = curve.nodes * getLodFactor();
 
         float time = glfwGetTime();
+
 
         for (int i = 0; i < nodes; i++) {
             const float t1 = curve.t0 + (curve.getT(time) - curve.t0) * static_cast<float>(i) / static_cast<float>(nodes);

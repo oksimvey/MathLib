@@ -15,7 +15,7 @@
 
 int main() {
 
-    auto screen2_d = Screen2D(800, 600, AbstractVector<2>(0,0));
+    auto screen2_d = Screen2D(800, 600, Vector2D(0,0));
 
     screen2_d.init();
 
@@ -27,9 +27,9 @@ int main() {
         screen2_d.addLine(Line(-0.1f, i, 0.1f, i, 1, 1, 1, 1, 5));
     }
 
-    const auto param = TimeParameter(true,  7.5f, 0, M_PI * 2,Easing::InOut, glfwGetTime(), 0);
+    const auto param = TimeParameter(true,  5.0f, 0, M_PI * 2,Easing::InOut, glfwGetTime(), 0);
 
-    auto curve = Curve<2>(0, param, 250);
+    auto curve = Curve<2>(0, param, 1000);
 
     curve.getPoint = [](const float t) {
         return AbstractVector<2>{cos(2*t)*cos(t),cos(2*t)* sin(t)};
@@ -37,7 +37,8 @@ int main() {
 
     curve.getColor = [](float t) -> std::array<float, 4> {
         float p = std::abs(sin(t*10));
-        return std::array<float, 4>{0.5f - p/2 ,0.25f+ p, 1, 1};
+        float s = std::abs(sin(t*100));
+        return std::array<float, 4>{0.5f - p/2 ,0.25f+ p, 0.25f + s, 1};
     };
 
     screen2_d.addCurve(curve);
