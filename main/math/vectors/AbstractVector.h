@@ -4,11 +4,13 @@
 #include <array>
 #include <cmath>
 #include <string>
+#include <math/vectors/IVector.h>
 
 // the vector dimension/number of components
 template <int dim>
 
-class AbstractVector {
+// abstract vector of dimension n
+class AbstractVector : public IVector {
 
   public:
 

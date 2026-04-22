@@ -19,6 +19,12 @@ add_executable(MathLib_main
         main/math/easing/EasingStyle.h
         main/rendering/screen/Screen3D.h
         main/key/KeyInputHandler.h
+        main/math/vectors/IVector.h
+        main/math/vectors/Vector2D.h
+        main/math/vectors/Vector3D.h
+        main/math/transformations/Matrix3f.h
+        main/math/transformations/ITransformation.h
+        main/math/vectors/Vector4D.h
 )
 
 target_include_directories(MathLib_main PRIVATE

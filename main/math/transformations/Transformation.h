@@ -1,6 +1,7 @@
 #ifndef TRANSFORMATION_H
 #define TRANSFORMATION_H
 
+#include "ITransformation.h"
 #include "math/vectors/AbstractVector.h"
 
 
@@ -8,7 +9,7 @@
 // output dim is the dimension of the transformed vectors
 template <int input_dim, int output_dim>
 
-class Transformation {
+class Transformation : public ITransformation {
 
   public:
 
