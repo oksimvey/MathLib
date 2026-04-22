@@ -1,0 +1,69 @@
+
+first, let's make a small roadmap to things to do;
+
+
+// 2D
+
+decides if the curve vertex is changing or no(all time params finished or constant), if no, pre generates all the vertices inside an array
+
+then checks if the pos is changing or not, if yes, u can just add the deslocation to the vertices array;
+
+LOD is just a way to skip more vertices during the rendering, depends on the cam zoom;
+
+implements an algorithim to calculate if the vertices actually should be rendered, some sort of culling;
+
+implements an algorithim to lock functions and vector fields in the cam view;
+
+implements a reset and a concurrent system to add curves in real time
+
+input handling
+
+implements a decent interface or command prompt
+
+implements strings + latex support with some cool anims
+
+implements shapes, similar idea in everything like the curves, but now we gonna have the reflection, brightness and refraction in it
+
+so implements shaders, that gonna makes sense of that reflection, brightness and refraction params
+
+creates a file format that can be read by the program, and generated
+
+creates a system that takes points and generates a bezier curve of them, can be read and used to create animations on curves and camera
+
+creates some mini draw software, where you can create objects from shapes, controlling all the rendering params
+
+so implements more features to the engine, like putting on OBBS to the shapes, controlling friction, elasticity, etc
+
+so with a implemented OBB system i can implement collision, physics, etc
+
+in a more advanced level, i could implement fluids sim, and more fancy physics stuff
+
+
+
+
+
+
+
+// 3D
+
+
+
+// misc
+
+pre-rendering system
+
+linear transformations and transformation visualizations
+
+more beautiful calculator of like, everything
+
+fractals
+
+complex functions representations
+
+atractors
+
+gravity sim
+
+
+
+

@@ -22,9 +22,28 @@ add_executable(MathLib_main
         main/math/vectors/IVector.h
         main/math/vectors/Vector2D.h
         main/math/vectors/Vector3D.h
-        main/math/transformations/Matrix3f.h
         main/math/transformations/ITransformation.h
-        main/math/vectors/Vector4D.h
+        main/math/quaternions/QuaternionF.h
+        main/rendering/renderable/IRenderableInstance.h
+        main/rendering/renderable/Renderable2DInstance.h
+        main/rendering/screen/IScreen.h
+        main/math/parameters/IColor.h
+        main/math/parameters/ConstantColor.h
+        main/math/parameters/IRenderParams.h
+        main/math/parameters/ConstantRenderParams.h
+        main/rendering/renderable/Renderable2DCurve.h
+        main/rendering/renderable/Renderable2DFrag.h
+        main/math/curves/ICurve.h
+        main/math/curves/Static2DCurve.h
+        main/math/curves/Dynamic2DCurve.h
+        main/math/curves/Static3DCurve.h
+        main/math/curves/Dynamic3DCurve.h
+        main/math/surfaces/ISurface.h
+        main/rendering/renderable/Renderable2DObject.h
+        main/math/surfaces/Static2DSurface.h
+        main/math/surfaces/Static3DSurface.h
+        main/math/surfaces/Dynamic3DSurface.h
+        main/math/surfaces/Dynamic2DSurface.h
 )
 
 target_include_directories(MathLib_main PRIVATE

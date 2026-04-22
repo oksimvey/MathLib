@@ -24,9 +24,9 @@ int main() {
         screen2_d.addLine(Line(-0.1f, i, 0.1f, i, 1, 1, 1, 1, 1));
     }
 
-    const auto param = TimeParameter(false,false,  5.0f, -M_PI/2, M_PI*3/2,Easing::InOut, glfwGetTime(), 0);
+    const auto param = TimeParameter(false,false,  5.0f, -M_PI/2, M_PI*3/2,Easing::InOut, glfwGetTime());
 
-    const std::vector parameters = {TimeParameter(false,false, 5.0f, 0, 1, Easing::InOut, glfwGetTime(), 5.0f)};
+    const std::vector parameters = {TimeParameter(false,false, 5.0f, 0, 1, Easing::InOut, glfwGetTime() + 5)};
 
     auto curve = Curve<2>(-M_PI/2, param, 250, parameters);
 

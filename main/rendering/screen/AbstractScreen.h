@@ -17,7 +17,6 @@ public:
 
     std::array<TimeParameter, 4> screencol;
 
-
     int width_, height_;
 
     AbstractScreen(const int width, const int height, const std::array<TimeParameter, 4>& color)

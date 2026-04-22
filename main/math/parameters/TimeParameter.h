@@ -13,14 +13,12 @@ class TimeParameter {
 public:
 
     const bool& shouldRepeat;
-    float startTime;
-    const float duration;
-    const float startValue;
-    const float endValue;
-    const Easing::EasingType easingType;
-    const float delay;
+    const float& startTime;
+    const float& duration;
+    const float& startValue;
+    const float& endValue;
+    const Easing::EasingType& easingType;
     const bool& playback;
-    const bool isConst;
 
     TimeParameter(const bool& repeat,
                  const bool& playback,
@@ -28,45 +26,27 @@ public:
                   const float& startValue,
                   const float& endValue,
                   const Easing::EasingType& type,
-                  const float& startTime,
-                  const float& delay)
+                  const float& startTime)
        : shouldRepeat(repeat),
          startTime(startTime),
          duration(duration),
          startValue(startValue),
          endValue(endValue),
          easingType(type),
-    playback(playback),
-    delay(delay),
-    isConst(false)
+    playback(playback)
     {}
 
-    TimeParameter(const bool& repeat,
-                const bool& playback,
-                 const float& duration,
-                 const float& startValue,
-                 const float& endValue,
-                 const Easing::EasingType& type,
-                 const float& startTime,
-                 const float& delay, const bool& isconst)
-      : shouldRepeat(repeat),
-        startTime(startTime),
-        duration(duration),
-        startValue(startValue),
-        endValue(endValue),
-        easingType(type),
-   playback(playback),
-   delay(delay),
-   isConst(isconst)
-    {}
+
+
+
 
     float getCurrentValue(const float& time) const {
 
-        if (isConst) {
+        if (endValue <= startValue) {
             return startValue;
         }
 
-        float realtime = time - (startTime + delay);
+        float realtime = time - startTime;
 
 
 
@@ -82,8 +62,9 @@ public:
 
             if (shouldRepeat) {
                 realtime = fmod(realtime, cycle);
-            } else if (realtime >= cycle) {
-                return startValue; // terminou o vai e volta
+            }
+            else if (realtime >= cycle) {
+                return startValue;
             }
 
             if (realtime <= duration) {
@@ -110,8 +91,7 @@ public:
 };
 
 static TimeParameter constantTimeParam(const float& value) {
-
-    return TimeParameter(false, false, 0, value, value, Easing::Linear, 0, 0, true);
+    return TimeParameter(false, false, 0, value, value, Easing::Linear, 0);
 }
 
 
