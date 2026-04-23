@@ -11,9 +11,16 @@
 
 int main() {
 
-    auto screen2_d = Screen2D(800, 600,
-        {constantTimeParam(0.1), constantTimeParam(0.1), constantTimeParam(0.15), constantTimeParam(1)}, AbstractVector<2>(0,0));
-
+    auto screen2_d = Screen2D(
+      800, 600,
+      std::array<TimeParameter<float>, 4>{
+          constantTimeParam<float>(0.1),
+          constantTimeParam<float>(0.1),
+          constantTimeParam<float>(0.15),
+          constantTimeParam<float>(1)
+      },
+      AbstractVector<2>(0,0)
+  );
     screen2_d.init();
 
     screen2_d.addLine(Line(-100, 0, 100, 0, 1, 1, 1, 1, 5));
@@ -24,9 +31,9 @@ int main() {
         screen2_d.addLine(Line(-0.1f, i, 0.1f, i, 1, 1, 1, 1, 1));
     }
 
-    const auto param = TimeParameter(false,false,  5.0f, -M_PI/2, M_PI*3/2,Easing::InOut, glfwGetTime());
+    const auto param = TimeParameter<float>(false,false,  5.0f, -M_PI/2, M_PI*3/2,Easing::InOut, glfwGetTime());
 
-    const std::vector parameters = {TimeParameter(false,false, 5.0f, 0, 1, Easing::InOut, glfwGetTime() + 5)};
+    const std::vector parameters = {TimeParameter<float>(false,false, 5.0f, 0, 1, Easing::InOut, glfwGetTime() + 5)};
 
     auto curve = Curve<2>(-M_PI/2, param, 250, parameters);
 

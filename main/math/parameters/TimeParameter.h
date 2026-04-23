@@ -8,6 +8,7 @@
 #include "math/easing/EasingStyle.h"
 
 
+template<typename T>
 class TimeParameter {
 
 public:
@@ -15,16 +16,16 @@ public:
     const bool& shouldRepeat;
     const float& startTime;
     const float& duration;
-    const float& startValue;
-    const float& endValue;
+    const T& startValue;
+    const T& endValue;
     const Easing::EasingType& easingType;
     const bool& playback;
 
     TimeParameter(const bool& repeat,
                  const bool& playback,
                   const float& duration,
-                  const float& startValue,
-                  const float& endValue,
+                  const T& startValue,
+                  const T& endValue,
                   const Easing::EasingType& type,
                   const float& startTime)
        : shouldRepeat(repeat),
@@ -40,7 +41,7 @@ public:
 
 
 
-    float getCurrentValue(const float& time) const {
+    T getCurrentValue(const float& time) const {
 
         if (endValue <= startValue) {
             return startValue;
@@ -90,7 +91,8 @@ public:
 
 };
 
-static TimeParameter constantTimeParam(const float& value) {
+template<typename T>
+static TimeParameter<T> constantTimeParam(const T& value) {
     return TimeParameter(false, false, 0, value, value, Easing::Linear, 0);
 }
 

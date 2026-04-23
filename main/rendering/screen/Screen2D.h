@@ -19,7 +19,7 @@ public:
     AbstractVector<2> position;
 
 
-    Screen2D(const int width, const int height, const std::array<TimeParameter, 4>& color, const AbstractVector<2> pos)
+    Screen2D(const int width, const int height, const std::array<TimeParameter<float>, 4>& color, const AbstractVector<2> pos)
             : AbstractScreen(width, height, color), position(pos) {}
 
 
@@ -98,11 +98,11 @@ void init() override {
     )";
 
     unsigned int vs = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vs, 1, &vertexShaderSource, NULL);
+    glShaderSource(vs, 1, &vertexShaderSource, nullptr);
     glCompileShader(vs);
 
     unsigned int fs = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fs, 1, &fragmentShaderSource, NULL);
+    glShaderSource(fs, 1, &fragmentShaderSource, nullptr);
     glCompileShader(fs);
 
     shaderProgram = glCreateProgram();
@@ -125,8 +125,10 @@ void init() override {
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6, nullptr, GL_DYNAMIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), static_cast<void*>(nullptr));
     glEnableVertexAttribArray(0);
+
+        glfwSwapInterval(5);
 
     // =========================
     // INPUT CALLBACKS
@@ -138,7 +140,6 @@ void init() override {
     glfwSetMouseButtonCallback(window, mouseButtonCallback);
     glfwSetCursorPosCallback(window, cursorPositionCallback);
 
-    glfwSwapInterval(5);
 }
 
     static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset) {

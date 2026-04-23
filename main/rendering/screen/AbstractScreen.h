@@ -15,11 +15,11 @@ public:
 
     std::vector<Curve<dim>> curves;
 
-    std::array<TimeParameter, 4> screencol;
+    std::array<TimeParameter<float>, 4> screencol;
 
     int width_, height_;
 
-    AbstractScreen(const int width, const int height, const std::array<TimeParameter, 4>& color)
+    AbstractScreen(const int width, const int height, const std::array<TimeParameter<float>, 4>& color)
             : screencol(color), width_(width), height_(height) {}
 
 

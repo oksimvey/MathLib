@@ -12,16 +12,15 @@ template <int dim>
 class Curve {
 
     public:
-     float t0;
+    float t0;
 
-    TimeParameter T;
-
+    TimeParameter<float> T;
 
     int nodes;
 
-    std::vector<TimeParameter> parameters;
+    std::vector<TimeParameter<float>> parameters;
 
-    Curve(float t0, const TimeParameter& parameter_, int nodes, const std::vector<TimeParameter>& params) : T(parameter_), parameters(params) {
+    Curve(float t0, const TimeParameter<float>& parameter_, int nodes, const std::vector<TimeParameter<float>>& params) : T(parameter_), parameters(params) {
         this->t0 = t0;
         this->nodes = nodes;
     }
