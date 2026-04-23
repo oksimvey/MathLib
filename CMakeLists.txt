@@ -12,7 +12,6 @@ add_executable(MathLib_main
         main/rendering/RenderingUtils.cpp
         main/math/transformations/LinearTransformation.h
         main/rendering/screen/AbstractScreen.h
-        main/rendering/screen/Screen2D.h
         main/rendering/Line.h
         main/math/calculus/Derivation.h
         main/math/parameters/TimeParameter.h
@@ -28,7 +27,6 @@ add_executable(MathLib_main
         main/rendering/screen/IScreen.h
         main/math/parameters/IColor.h
         main/math/parameters/IRenderParams.h
-        main/math/parameters/ConstantRenderParams.h
         main/rendering/renderable/Renderable2DCurve.h
         main/rendering/renderable/Renderable2DFrag.h
         main/math/curves/ICurve.h
@@ -44,8 +42,9 @@ add_executable(MathLib_main
         main/math/surfaces/Dynamic2DSurface.h
         main/rendering/screen/IScreen2D.h
         main/rendering/screen/IScreen3D.h
-        main/math/parameters/Mode.h
         main/rendering/renderable/Renderable2DVertexState.h
+        main/math/parameters/ConstantColorParam.h
+        main/math/parameters/DynamicColorParam.h
 )
 
 target_include_directories(MathLib_main PRIVATE

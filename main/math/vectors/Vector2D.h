@@ -8,6 +8,8 @@
 #include <cmath>
 #include "math/vectors/IVector.h"
 
+#include <string>
+
 class Vector2D : public IVector {
 
 public:
@@ -88,6 +90,11 @@ public:
 
     float isPerpendicular(const Vector2D& vec) const {
         return dotProduct(vec) == 0;
+    }
+
+    Vector2D rotate(const float& angle) const {
+        return Vector2D(x * std::cos(angle) - y * std::sin(angle),
+                       x * std::sin(angle) + y * std::cos(angle));
     }
 
     Vector2D normal() const {

@@ -5,28 +5,31 @@
 #ifndef MATHLIB_MAIN_RENDERABLE2DCURVE_H
 #define MATHLIB_MAIN_RENDERABLE2DCURVE_H
 #include "Renderable2DInstance.h"
-#include "Renderable2DVertexState.h"
-#include "math/curves/Curve.h"
+#include "math/curves/ICurve.h"
 
-class Renderable2DCurve : public Renderable2DInstance {
+template<int nodes>
+class Renderable2DCurve : public Renderable2DInstance<nodes> {
 
-    int nodes;
 
-    Curve<2> curve;
+    ICurve<2> curve;
 
-    std::array<Renderable2DVertexState, nodes> vertices;
+public:
 
-    void generate();
+    Renderable2DCurve(const ICurve<2> curve, Renderable2DInstance<nodes> instance) : Renderable2DInstance<nodes>(instance), curve(curve) {}
 
-    void updateVertices();
+    void generate() {
 
-    void updateCurvePoints();
+        for (int i = 0; i < nodes; i++) {
+            const float& t = curve.t0 + (curve.T.endValue - curve.t0) * static_cast<float>(i) / static_cast<float>(nodes);
+            const float& x = curve.getPoint(t)[0];
+            const float& y = curve.getPoint(t)[1];
+            this -> setVertex(i, Renderable2DVertexState(x, y, curve.getColor()));
+        }
+    }
 
-    void updateCurvePos();
-
-    void updateCamPos();
-
-    void updateCamZoom();
+    static int getNodes() {
+        return nodes;
+    }
 
 
 };

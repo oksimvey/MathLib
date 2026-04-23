@@ -8,13 +8,12 @@
 #include "math/vectors/IVector.h"
 
 class IRenderableInstance {
-public:
 
-    IColor color;
+public:
 
     IRenderableInstance() = default;
 
-    virtual IVector getRealWorldVertex() = 0;
+
 
 
 };

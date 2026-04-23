@@ -6,7 +6,7 @@
 #define MATHLIB_MAIN_ISCREEN_H
 #include "glad/glad.h"
 #include "math/parameters/IColor.h"
-#include "math/vectors/Vector2D.h"
+#include "rendering/renderable/Renderable2DVertexState.h"
 
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -16,7 +16,7 @@ class IScreen {
 
     public:
 
-    IColor screenColor;
+    const IColor& screenColor;
 
     const float& height;
 
@@ -27,12 +27,16 @@ class IScreen {
     GLFWwindow* window;
     unsigned int VAO, VBO, shaderProgram;
 
-  IScreen(const float& height_, const float& width_, const IColor& color) : screenColor(color), height(height_), width(width_) {}
 
+    IScreen(const float& height_, const float& width_, const IColor& color) : screenColor(color), height(height_), width(width_) {}
 
+    static void framebuffer_size_callback(GLFWwindow* window, int w, int h)
+    {
+        glViewport(0, 0, w, h);
+    }
 
+    void init() {
 
-     void init() {
           glfwInit();
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -41,7 +45,7 @@ class IScreen {
 
     glfwWindowHint(GLFW_SAMPLES, 4);
 
-    window = glfwCreateWindow(width_, height_, "OpenGL Window", NULL, NULL);
+    window = glfwCreateWindow(width, height, "OpenGL Window", NULL, NULL);
 
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
@@ -132,7 +136,32 @@ class IScreen {
 
       while (!glfwWindowShouldClose(window)) {
           tick = glfwGetTime();
+
+          int width_, height_;
+          glfwGetFramebufferSize(window, &width_, &height_);
+
+          const float aspect = (float)width_ / (float)height_;
+
+          glViewport(0, 0, width_, height_);
+
+          glUseProgram(shaderProgram);
+
+          const int aspectLoc = glGetUniformLocation(shaderProgram, "aspect");
+          glUniform1f(aspectLoc, aspect);
+
+
+          glClearColor(screenColor.getRed(tick)/ 255.0f, screenColor.getGreen(tick)/ 255.0f,
+              screenColor.getBlue(tick)/ 255.0f, screenColor.getAlpha(tick)/ 255.0f);
+
+
+
+          glClear(GL_COLOR_BUFFER_BIT);
+
+
           render();
+
+          glfwSwapBuffers(window);
+          glfwPollEvents();
       }
 
       glfwTerminate();
@@ -142,9 +171,8 @@ class IScreen {
 
     virtual void render() = 0;
 
-    virtual void renderLine() = 0;
+    virtual void renderLine(const Renderable2DVertexState& p1, const Renderable2DVertexState& p2, const float& thickness) const = 0;
 
-    virtual void renderCurves() = 0;
 
 
 };

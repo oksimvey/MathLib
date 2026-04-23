@@ -11,7 +11,7 @@ public:
 
     QuaternionF() : a(1), b(0), c(0), d(0) {}
 
-    QuaternionF(float a, float b, float c, float d)
+    QuaternionF(const float& a, const float& b, const float& c, const& float d)
         : a(a), b(b), c(c), d(d) {}
 
     QuaternionF operator*(const QuaternionF& q) const {
@@ -41,7 +41,7 @@ public:
         return v + uv * (2.0f * a) + uuv * 2.0f;
     }
 
-    QuaternionF rotateXAxis(const float angle) const {
+    QuaternionF rotateXAxis(const float& angle) const {
         const float s = std::sin(angle * 0.5f);
         const float c0 = std::cos(angle * 0.5f);
 
@@ -53,7 +53,7 @@ public:
         );
     }
 
-    QuaternionF rotateYAxis(const float angle) const {
+    QuaternionF rotateYAxis(const float& angle) const {
         const float s = std::sin(angle * 0.5f);
         const float c0 = std::cos(angle * 0.5f);
 
@@ -65,7 +65,7 @@ public:
         );
     }
 
-    QuaternionF rotateZAxis(const float angle) const {
+    QuaternionF rotateZAxis(const float& angle) const {
         const float s = std::sin(angle * 0.5f);
         const float c0 = std::cos(angle * 0.5f);
 
