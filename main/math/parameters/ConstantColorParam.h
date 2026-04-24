@@ -8,9 +8,10 @@
 
 class ConstantColorParam : public IColor {
 
-    const uint8_t color[4];
 
     public:
+
+        const uint8_t color[4];
 
        ConstantColorParam() : color{0, 0, 0, 0} {}
 
@@ -21,17 +22,33 @@ class ConstantColorParam : public IColor {
             return color[0];
         }
 
+    uint8_t getRed() const {
+           return color[0];
+       }
+
         uint8_t getGreen(const float& time) const override {
             return color[1];
         }
+
+    uint8_t getGreen() const {
+           return color[1];
+       }
 
     uint8_t getBlue(const float& time) const override {
         return color[2];
     }
 
+    uint8_t getBlue() const {
+           return color[2];
+       }
+
     uint8_t getAlpha(const float& time) const override {
         return color[3];
     }
+
+    uint8_t getAlpha() const {
+           return color[3];
+       }
 };
 
 #endif //MATHLIB_MAIN_CONSTANTCOLORPARAM_H

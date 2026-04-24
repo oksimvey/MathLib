@@ -19,7 +19,7 @@ public:
 
     TimeParameter<float> T;
 
-    ICurve(float t0, TimeParameter<float> time_parameter): t0(t0), T(time_parameter) {}
+    ICurve(const float t0, const TimeParameter<float>& time_parameter): t0(t0), T(time_parameter) {}
 
     float getT(const float& time) const {
         return T.getCurrentValue(time);
@@ -27,7 +27,7 @@ public:
 
     std::function<std::array<float, dimension>(float)> getPoint;
 
-    std::function<ConstantColorParam()> getColor;
+    std::function<ConstantColorParam(float)> getColor;
 
 };
 

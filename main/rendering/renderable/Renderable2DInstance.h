@@ -36,7 +36,7 @@ public:
     void setVertex(const int& index,
                    const float& x,
                    const float& y,
-                   ConstantColorParam color_) {
+                   const ConstantColorParam& color_) {
         vertices[index] = Renderable2DVertexState(x, y, color_);
     }
 

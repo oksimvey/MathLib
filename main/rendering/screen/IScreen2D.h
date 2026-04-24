@@ -7,12 +7,14 @@
 #include "IScreen.h"
 #include "math/vectors/Vector2D.h"
 #include "rendering/renderable/Renderable2DCurve.h"
+#include <cmath>
 
 class IScreen2D : public IScreen {
 
     public:
 
 
+    std::vector<Renderable2DCurve<250>> curves;
 
     float zoom;
 
@@ -21,7 +23,7 @@ class IScreen2D : public IScreen {
     float posy;
 
     float getLodFactor() const {
-        return 1/zoom;
+        return 1/(32*zoom*zoom);
     }
 
     IScreen2D(const float& height_, const float& width_, const IColor& color, const Vector2D& pos) : IScreen(height_, width_, color), zoom(1.0f), posx(pos.x), posy(pos.y) {}
@@ -29,11 +31,19 @@ class IScreen2D : public IScreen {
 
     void render() override {
 
-        Renderable2DVertexState p1 = Renderable2DVertexState(-5/zoom+posx, 0, ConstantColorParam(255, 255, 255, 255));
-        Renderable2DVertexState p2 = Renderable2DVertexState(5/zoom+posx, 0, ConstantColorParam(255, 255, 255, 255));
+        for (auto& curve : curves) {
+            const int step = fmax(1,std::round(getLodFactor()));
+            for (int i = 0; i < (curve.getNodes() - step); i+= step) {
+                Renderable2DVertexState p1 = curve.getVertex(i);
+                Renderable2DVertexState p2 = curve.getVertex(i + step);
+                renderLine(p1, p2, 5);
+            }
+        }
+
+        Renderable2DVertexState p1 = Renderable2DVertexState(-2/zoom+posx, 0, ConstantColorParam(255, 255, 255, 255));
+        Renderable2DVertexState p2 = Renderable2DVertexState(2/zoom+posx, 0, ConstantColorParam(255, 255, 255, 255));
         Renderable2DVertexState P1 = Renderable2DVertexState(0, -5/zoom+posy, ConstantColorParam(255, 255, 255, 255));
         Renderable2DVertexState P2 = Renderable2DVertexState(0, 5/zoom+posy, ConstantColorParam(255, 255, 255, 255));
-
         renderLine(p1, p2, 5);
         renderLine(P1, P2, 5);
         for (int i = std::round(-10/zoom); i < std::round(10/zoom); i++) {
@@ -115,27 +125,24 @@ class IScreen2D : public IScreen {
 
     void renderLine(const Renderable2DVertexState& p1, const Renderable2DVertexState& p2, const float& thickness) const override {
 
-        const    std::array<float, 2> P1 = toScreen(p1);
-
-        const    std::array<float, 2> P2 =  toScreen(p2);
+        const std::array<float, 2> P1 = toScreen(p1);
+        const std::array<float, 2> P2 = toScreen(p2);
 
         const float vertices[] = {
             P1[0], P1[1], 0.0f,
-             P2[0], P2[1], 0.0f
-         };
+            p1.getRed() / 255.0f, p1.getGreen() / 255.0f, p1.getBlue() / 255.0f, p1.getAlpha() / 255.0f,
+
+            P2[0], P2[1], 0.0f,
+            p2.getRed() / 255.0f, p2.getGreen() / 255.0f, p2.getBlue() / 255.0f, p2.getAlpha() / 255.0f
+        };
 
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
 
         glUseProgram(shaderProgram);
 
-        const int loc = glGetUniformLocation(shaderProgram, "uColor");
-
-        glUniform4f(loc, p1.col.getRed(tick) / 255.0f, p1.col.getGreen(tick)/ 255.0f
-            , p1.col.getBlue(tick)/ 255.0f, p1.col.getAlpha(tick)/ 255.0f);
-
         glBindVertexArray(VAO);
-        glLineWidth(thickness);
+        glLineWidth(thickness*zoom);
         glDrawArrays(GL_LINES, 0, 2);
     }
 

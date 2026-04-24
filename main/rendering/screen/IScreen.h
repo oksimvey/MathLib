@@ -76,27 +76,31 @@ class IScreen {
     // =========================
 
     const auto vertexShaderSource = R"(
-    #version 330 core
-    layout(location = 0) in vec3 aPos;
+  #version 330 core
 
-    uniform float aspect;
+layout(location = 0) in vec3 aPos;
+layout(location = 1) in vec4 aColor;
 
-    void main()
-    {
-        vec2 pos = aPos.xy;
-        pos.x /= aspect;
-        gl_Position = vec4(pos, 0.0, 1.0);
-    }
+uniform float aspect;
+
+out vec4 vColor;
+
+void main() {
+    gl_Position = vec4(aPos.x / aspect, aPos.y, aPos.z, 1.0);
+    vColor = aColor;
+}
     )";
 
     const auto fragmentShaderSource = R"(
-    #version 330 core
-    out vec4 FragColor;
-    uniform vec4 uColor;
+   #version 330 core
 
-    void main() {
-        FragColor = uColor;
-    }
+in vec4 vColor;
+out vec4 FragColor;
+
+void main() {
+    FragColor = vColor;
+}
+
     )";
 
     const unsigned int vs = glCreateShader(GL_VERTEX_SHADER);
@@ -125,10 +129,13 @@ class IScreen {
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6, nullptr, GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 14, nullptr, GL_DYNAMIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), static_cast<void*>(nullptr));
-    glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)0);
+        glEnableVertexAttribArray(0);
+
+        glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(3 * sizeof(float)));
+        glEnableVertexAttribArray(1);
 
       glfwSwapInterval(5);
 
