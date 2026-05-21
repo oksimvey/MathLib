@@ -1,0 +1,8 @@
+[
+{
+  "directory": "C:/Users/hapoe/OneDrive/Documentos/MathLib/build",
+  "command": "C:\\msys64\\mingw64\\bin\\clang++.exe -g -std=gnu++23 -o CMakeFiles\\MathLib.dir\\src\\main\\marco\\mathlib\\main.cpp.obj -c C:\\Users\\hapoe\\OneDrive\\Documentos\\MathLib\\src\\main\\marco\\mathlib\\main.cpp",
+  "file": "C:/Users/hapoe/OneDrive/Documentos/MathLib/src/main/marco/mathlib/main.cpp",
+  "output": "C:/Users/hapoe/OneDrive/Documentos/MathLib/build/CMakeFiles/MathLib.dir/src/main/marco/mathlib/main.cpp.obj"
+}
+]
