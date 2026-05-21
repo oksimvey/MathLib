@@ -26,7 +26,7 @@ int main() {
 
   
 
-    RealNumber a(0.3 + 0.1 + 0.1);
+    RealNumber a(0.3 + 0.2 + 0.1);
 
     RealNumber b(4, 1);
 
