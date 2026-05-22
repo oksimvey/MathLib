@@ -4,7 +4,9 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/src/main/marco/mathlib"
+                "${workspaceFolder}/src/main/marco/mathlib",
+                "C:/Program Files/Java/jdk-21/include",
+                "C:/Program Files/Java/jdk-21/include/win32"
             ],
             "defines": [
                 "_DEBUG",

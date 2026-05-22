@@ -7,6 +7,7 @@ public class Main {
 
 
         Animal animal = new Animal(AnimalsEnum.WOLF);
+
         animal.makeSound();
        
     }
