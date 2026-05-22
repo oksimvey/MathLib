@@ -1,41 +1,25 @@
-
 #include <iostream>
-#include "RealNumber.h"
-
-
-
+#include <chrono>
+#include <cstdint>
 
 int main() {
 
-    int a = 4;
-
-    int* b = &a;
-
-   *b = 7;
-
-
-   RealNumber num1(2, 0);
-
-   RealNumber num2(3, 0);
-
-   RealNumber result = num1 + num2;
-
-
-
-
-
-  
-
-    std::cout << a << std::endl;
-
-    std::cout << *b << std::endl;
-
-
-
-
     
+long long result = 0;
 
+    auto t0 = std::chrono::high_resolution_clock::now();
 
-    
-    return 0;
+    for (long long i = 0; i < 10000000000LL; i++) {
+        result += i * i;
+    }
+
+    auto t1 = std::chrono::high_resolution_clock::now();
+
+    auto ns = std::chrono::duration_cast<
+        std::chrono::nanoseconds
+    >(t1 - t0);
+
+    std::cout << result << '\n';
+
+    std::cout << ns.count() << "ns\n";
 }

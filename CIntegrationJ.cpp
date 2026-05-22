@@ -1,7 +1,11 @@
 #include "CIntegrationJ.h"
 
-JNIEXPORT jint JNICALL Java_CIntegrationJ_add
+JNIEXPORT jlong JNICALL Java_CIntegrationJ_add
   (JNIEnv *env, jobject obj, jint a, jint b)
 {
-    return a * b;
+  long long result = 0;
+     for (long long i = 0; i < 10000000000LL; i++) {
+        result += i * i;
+    }
+    return (jlong)result;
 }

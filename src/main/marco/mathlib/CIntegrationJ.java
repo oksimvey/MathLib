@@ -5,17 +5,25 @@ public class CIntegrationJ {
         System.loadLibrary("native");
     }
 
-    public native int add(int a, int b);
+    public native long add(int a, int b);
 
-    public static void main(String[] args) {
-        CIntegrationJ integration = new CIntegrationJ();
+    static CIntegrationJ integration = new CIntegrationJ();
 
-        int result = integration.add(5, 3);
-
-        
+   public static void main(String[] args) {
 
 
+    long result = 0;
+
+        long t0 = System.nanoTime();
+
+       result = integration.add(0,0);
+
+      
+
+        long t1 = System.nanoTime();
 
         System.out.println(result);
+
+        System.out.println((t1 - t0) / 1000000 + "ms");
     }
 }

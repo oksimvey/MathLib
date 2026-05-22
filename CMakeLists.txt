@@ -7,3 +7,5 @@ set(CMAKE_CXX_STANDARD 23)
 file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS src/*.cpp)
 
 add_executable(MathLib ${SRC_FILES})
+
+target_compile_options(MathLib PRIVATE -O3)

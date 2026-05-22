@@ -4,6 +4,7 @@
 # SRC_FILES at CMakeLists.txt:7 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/hapoe/OneDrive/Documentos/MathLib/src/*.cpp")
 set(OLD_GLOB
+  "C:/Users/hapoe/OneDrive/Documentos/MathLib/src/main/marco/mathlib/RationalNumber.cpp"
   "C:/Users/hapoe/OneDrive/Documentos/MathLib/src/main/marco/mathlib/main.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")

@@ -12,7 +12,7 @@ extern "C" {
  * Method:    add
  * Signature: (II)I
  */
-JNIEXPORT jint JNICALL Java_CIntegrationJ_add
+JNIEXPORT jlong JNICALL Java_CIntegrationJ_add
   (JNIEnv *, jobject, jint, jint);
 
 #ifdef __cplusplus

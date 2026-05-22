@@ -5,6 +5,7 @@
 			"expression" : "C:/Users/hapoe/OneDrive/Documentos/MathLib/src/*.cpp",
 			"paths" : 
 			[
+				"C:/Users/hapoe/OneDrive/Documentos/MathLib/src/main/marco/mathlib/RationalNumber.cpp",
 				"C:/Users/hapoe/OneDrive/Documentos/MathLib/src/main/marco/mathlib/main.cpp"
 			],
 			"recurse" : true

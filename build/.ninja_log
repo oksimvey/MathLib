@@ -1,4 +1,7 @@
 # ninja log v7
-77	2427	8011100111141605	CMakeFiles/MathLib.dir/src/main/marco/mathlib/main.cpp.obj	20802d8be2294685
-2428	2789	8011100134762825	MathLib.exe	d5b8c538e86ef097
-3	40	8011100208579613	C:/Users/hapoe/OneDrive/Documentos/MathLib/build/CMakeFiles/cmake.verify_globs	f53315231118359b
+42	1792	8011792048787284	CMakeFiles/MathLib.dir/src/main/marco/mathlib/main.cpp.obj	7a53cc50328870
+1792	1931	8011792066323440	MathLib.exe	ac6949c7ac02edb5
+3	37	8011792095346743	C:/Users/hapoe/OneDrive/Documentos/MathLib/build/CMakeFiles/cmake.verify_globs	f53315231118359b
+34	906	8011803183594123	build.ninja	5b34051e306c4d16
+34	906	8011803183524744	C:/Users/hapoe/OneDrive/Documentos/MathLib/build/cmake_install.cmake	5b34051e306c4d16
+43	1434	8011788198406878	CMakeFiles/MathLib.dir/src/main/marco/mathlib/RationalNumber.cpp.obj	f76c92c03976eb22

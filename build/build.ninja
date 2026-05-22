@@ -49,10 +49,18 @@ cmake_ninja_workdir = C$:/Users/hapoe/OneDrive/Documentos/MathLib/build/
 
 build cmake_object_order_depends_target_MathLib: phony || .
 
+build CMakeFiles/MathLib.dir/src/main/marco/mathlib/RationalNumber.cpp.obj: CXX_COMPILER__MathLib_unscanned_Debug C$:/Users/hapoe/OneDrive/Documentos/MathLib/src/main/marco/mathlib/RationalNumber.cpp || cmake_object_order_depends_target_MathLib
+  CONFIG = Debug
+  DEP_FILE = CMakeFiles\MathLib.dir\src\main\marco\mathlib\RationalNumber.cpp.obj.d
+  FLAGS = -g -std=gnu++23 -O3
+  OBJECT_DIR = CMakeFiles\MathLib.dir
+  OBJECT_FILE_DIR = CMakeFiles\MathLib.dir\src\main\marco\mathlib
+  TARGET_SUPPORT_DIR = CMakeFiles\MathLib.dir
+
 build CMakeFiles/MathLib.dir/src/main/marco/mathlib/main.cpp.obj: CXX_COMPILER__MathLib_unscanned_Debug C$:/Users/hapoe/OneDrive/Documentos/MathLib/src/main/marco/mathlib/main.cpp || cmake_object_order_depends_target_MathLib
   CONFIG = Debug
   DEP_FILE = CMakeFiles\MathLib.dir\src\main\marco\mathlib\main.cpp.obj.d
-  FLAGS = -g -std=gnu++23
+  FLAGS = -g -std=gnu++23 -O3
   OBJECT_DIR = CMakeFiles\MathLib.dir
   OBJECT_FILE_DIR = CMakeFiles\MathLib.dir\src\main\marco\mathlib
   TARGET_SUPPORT_DIR = CMakeFiles\MathLib.dir
@@ -65,7 +73,7 @@ build CMakeFiles/MathLib.dir/src/main/marco/mathlib/main.cpp.obj: CXX_COMPILER__
 #############################################
 # Link the executable MathLib.exe
 
-build MathLib.exe: CXX_EXECUTABLE_LINKER__MathLib_Debug CMakeFiles/MathLib.dir/src/main/marco/mathlib/main.cpp.obj
+build MathLib.exe: CXX_EXECUTABLE_LINKER__MathLib_Debug CMakeFiles/MathLib.dir/src/main/marco/mathlib/RationalNumber.cpp.obj CMakeFiles/MathLib.dir/src/main/marco/mathlib/main.cpp.obj
   CONFIG = Debug
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
