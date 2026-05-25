@@ -3,11 +3,27 @@
 #include "../number/Scalar.h"
 
 template <int Dimension, typename ScalarType>
-
 class AbstractVector {
 
-       static_assert(Dimension > 0,
-                  "Dimension must be greater than 0");
+       static_assert(Dimension > 0, "Dimension must be greater than 0");
+
+       const ScalarType components[Dimension];
+
+       public:
+
+       AbstractVector(const ScalarType components[Dimension]) : components(components) {}
+
+       
+
+
+       
+
+
+
+
+
+
+
 
 
 };
