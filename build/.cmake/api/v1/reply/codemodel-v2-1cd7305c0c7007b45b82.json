@@ -40,7 +40,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "MathLib::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-MathLib-Debug-87b1a5bb86658b2230ca.json",
+					"jsonFile" : "target-MathLib-Debug-f4d2a1b5485c2cfacb9b.json",
 					"name" : "MathLib",
 					"projectIndex" : 0
 				}
@@ -50,8 +50,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/hapoe/OneDrive/Documentos/MathLib/build",
-		"source" : "C:/Users/hapoe/OneDrive/Documentos/MathLib"
+		"build" : "C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build",
+		"source" : "C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib"
 	},
 	"version" : 
 	{

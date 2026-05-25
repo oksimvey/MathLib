@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/hapoe/OneDrive/Documentos/MathLib/build"
+			"value" : "c:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -611,7 +611,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/hapoe/OneDrive/Documentos/MathLib/build/CMakeFiles/pkgRedirects"
+			"value" : "C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -683,7 +683,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/hapoe/OneDrive/Documentos/MathLib"
+			"value" : "C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1355,7 +1355,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/hapoe/OneDrive/Documentos/MathLib/build"
+			"value" : "C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build"
 		},
 		{
 			"name" : "MathLib_IS_TOP_LEVEL",
@@ -1379,7 +1379,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/hapoe/OneDrive/Documentos/MathLib"
+			"value" : "C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib"
 		}
 	],
 	"kind" : "cache",

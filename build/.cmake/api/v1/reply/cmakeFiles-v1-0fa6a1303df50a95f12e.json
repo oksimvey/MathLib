@@ -2,11 +2,10 @@
 	"globsDependent" : 
 	[
 		{
-			"expression" : "C:/Users/hapoe/OneDrive/Documentos/MathLib/src/*.cpp",
+			"expression" : "C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/src/*.cpp",
 			"paths" : 
 			[
-				"C:/Users/hapoe/OneDrive/Documentos/MathLib/src/main/marco/mathlib/RationalNumber.cpp",
-				"C:/Users/hapoe/OneDrive/Documentos/MathLib/src/main/marco/mathlib/main.cpp"
+				"C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/src/main/marco/mathlib/math/main.cpp"
 			],
 			"recurse" : true
 		}
@@ -246,8 +245,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "C:/Users/hapoe/OneDrive/Documentos/MathLib/build",
-		"source" : "C:/Users/hapoe/OneDrive/Documentos/MathLib"
+		"build" : "C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build",
+		"source" : "C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib"
 	},
 	"version" : 
 	{
