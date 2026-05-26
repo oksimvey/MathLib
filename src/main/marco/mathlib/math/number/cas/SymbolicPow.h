@@ -1,37 +1,30 @@
-#ifndef SYMBOLICPOW_H
-#define SYMBOLICPOW_H
+#ifndef SYMBOLIC_POW_H
+#define SYMBOLIC_POW_H
 
+#include "nodes/SymbolicNodePair.h"
 #include <cmath>
-#include <string>
-#include <sstream>
-template<typename T>
-class SymbolicPow {
 
-    const T base;
-
-    const T exponent;
+class SymbolicPow : public SymbolicNodePair {
 
     public:
 
-    static_assert(std::is_arithmetic<T>::value, "SymbolicPow requires an arithmetic type");
+    SymbolicPow(NodePtr left, NodePtr right)
+    : SymbolicNodePair(
+        std::move(left),
+        std::move(right)
+      ) {}
 
-        SymbolicPow(T base, T exponent) : base(base), exponent(exponent) {}
-
-        SymbolicPow(const std::string& str) : base(std::stod(str.substr(0, str.find('^')))), exponent(std::stod(str.substr(str.find('^') + 1))) {}
-
-    std::string toString() const {
-    std::ostringstream oss;
-    oss << base << "^" << exponent;
-    return oss.str();
-}
-
-    T evaluate() const {
-        return std::pow(base, exponent);
+    std::string toString() override {
+      if (dynamic_cast<SymbolicNodePair *>(right.get())) {
+        return   left->toString() + "^" + "(" + right->toString() + ")";
+      }
+      return left->toString() + "^" + right->toString();
     }
 
-
+    double evaluate() override {
+        return std::pow(left->evaluate(), right->evaluate());
+    }
 
 };
-
 
 #endif

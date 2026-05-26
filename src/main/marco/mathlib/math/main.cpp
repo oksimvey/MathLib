@@ -1,20 +1,47 @@
 
-#include "number/cas/SymbolicConstant.h"
-#include "number/cas/SymbolicConstants.h"
-#include "number/cas/SymbolicPow.h"
+#include <algorithm>
 #include <iostream>
-#include <string>
+#include <ostream>
+#include "windows.h"
+#include "number/cas/SymbolicInteger.h"
+
+#include "number/cas/SymbolicSqrt.h"
+
+#include "number/cas/SymbolicPow.h"
+
+#include "number/cas/SymbolicFraction.h"
+
 
 int main() {
 
+   SetConsoleOutputCP(CP_UTF8);
 
-  const SymbolicConstant<float> &pi = SymbolicConstants::PhiF;
+  SymbolicSqrt sqrt(makeNode(SymbolicInteger(2)));
 
 
-  std::string pistr = SymbolicConstants::constants[1];
+  SymbolicInteger a = SymbolicInteger(2);
 
-  std::cout << pi.toString() << "=" << std::to_string(pi.evaluate())
-            << std::endl;
+  SymbolicInteger b(3);
+
+  SymbolicPow e = SymbolicPow(makeNode(a), makeNode(  b));
+
+  
+
+    SymbolicPow c(
+    makeNode(std::move(sqrt)),
+    makeNode(std::move(e))
+  );
+
+  SymbolicFraction f(makeNode(a), makeNode(std::move(c)));
+
+
+  std::cout << f.toString()<< std::endl;
+
+  
+
+
+
+
 
   return 0;
 }
