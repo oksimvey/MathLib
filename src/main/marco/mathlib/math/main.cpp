@@ -11,31 +11,23 @@
 
 #include "number/cas/SymbolicFraction.h"
 
+#include "number/RealNumber.h"
+
 
 int main() {
 
-   SetConsoleOutputCP(CP_UTF8);
+    SetConsoleOutputCP(CP_UTF8);
 
-  SymbolicSqrt sqrt(makeNode(SymbolicInteger(2)));
+  RealNumber a(1);
 
+  RealNumber b(2);
 
-  SymbolicInteger a = SymbolicInteger(2);
+  std::cout << ((a + b)/(b.sqrt())).node->toString() << std::endl;
 
-  SymbolicInteger b(3);
+  std::cout << ((a + b)/b).node->evaluate() << std::endl;
 
-  SymbolicPow e = SymbolicPow(makeNode(a), makeNode(  b));
-
-  
-
-    SymbolicPow c(
-    makeNode(std::move(sqrt)),
-    makeNode(std::move(e))
-  );
-
-  SymbolicFraction f(makeNode(a), makeNode(std::move(c)));
-
-
-  std::cout << f.toString()<< std::endl;
+ 
+ 
 
   
 

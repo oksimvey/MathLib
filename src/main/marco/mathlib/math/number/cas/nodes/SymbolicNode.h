@@ -18,14 +18,11 @@ public:
 
 };
 
-using NodePtr = std::unique_ptr<SymbolicNode>;
+using NodePtr = std::shared_ptr<SymbolicNode>;
 
-
-template<typename T>
-NodePtr makeNode(T&& value) {
-    return std::make_unique<std::decay_t<T>>(
-        std::forward<T>(value)
-    );
+template<typename T, typename... Args>
+NodePtr makeNode(Args&&... args) {
+    return std::make_unique<T>(std::forward<Args>(args)...);
 }
 
 

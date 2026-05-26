@@ -30,6 +30,7 @@ public:
     }
 
     std::string result;
+  
 
     result += centerText(numerator, width);
     result += '\n';
