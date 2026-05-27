@@ -2,10 +2,8 @@
 #include <iostream>
 #include <ostream>
 
+#include "number/cas/operations/SymbolicFraction.h"
 #include "windows.h"
-
-
-
 
 #include "number/scalar/RealNumber.h"
 
@@ -15,9 +13,9 @@ int main() {
 
   SetConsoleOutputCP(CP_UTF8);
 
-  RealNumber a(4);
+  const RealNumber a(4);
 
-  RealNumber b(0.5);
+  const RealNumber b(0.5);
 
   std::cout << (a^b).toString()  << std::endl;
 

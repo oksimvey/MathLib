@@ -7,6 +7,7 @@
 class SymbolicNode {
 
 public:
+
   virtual ~SymbolicNode() = default;
 
   virtual std::string toString() const = 0;
