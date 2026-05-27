@@ -1,28 +1,37 @@
 #ifndef MATHLIB_REALNUMBER_H
 #define MATHLIB_REALNUMBER_H
 
-#include "cas/SymbolicFraction.h"
-#include "cas/SymbolicInteger.h"
-#include "cas/SymbolicSqrt.h"
-#include "cas/SymbolicPow.h"
-#include "cas/nodes/SymbolicNode.h"
-#include "cas/nodes/SymbolicNode.h"
-#include "cas/SymbolicSum.h"
-#include "cas/SymbolicMultiplication.h"
-#include "cas/SymbolicSub.h"
+#include "../cas/SymbolicNumber.h"
+#include "../cas/operations/SymbolicFraction.h"
+#include "../cas/functions/SymbolicSqrt.h"
+#include "../cas/operations/SymbolicPow.h"
+#include "../cas/SymbolicVariable.h"
+#include "../cas/nodes/SymbolicNode.h"
+#include "../cas/operations/SymbolicSum.h"
+#include "../cas/operations/SymbolicMultiplication.h"
+#include "../cas/operations/SymbolicSub.h"
+#include <string>
 
 class RealNumber  {
 
 
     public :
 
-     NodePtr node;
+     SymbolicNode::NodePtr node;
 
-    RealNumber(NodePtr node) : node(std::move(node)) {}
+     std::string toString() const { return node->toString(); }
 
-    RealNumber(int value) : node(makeNode<SymbolicInteger>(value)) {}
+     double evaluate() const { return node->evaluate(); }
+
+
+
+    RealNumber(SymbolicNode::NodePtr node) : node(std::move(node)) {}
+
+    RealNumber(double value) : node(SymbolicNode::makeNode<SymbolicNumber>(value)) {}
+
+    RealNumber(std::string value) : node(SymbolicNode::makeNode<SymbolicVariable>(value)) {}
     RealNumber operator+(const RealNumber &other) const {
-      return RealNumber(makeNode<SymbolicSum>(node, other.node));
+      return RealNumber(SymbolicNode::makeNode<SymbolicSum>(node, other.node)->simplify());
     }
 
     RealNumber &operator+=(const RealNumber &other) {
@@ -31,7 +40,7 @@ class RealNumber  {
     }
 
     RealNumber operator-(const RealNumber &other)  const {
-      return RealNumber(makeNode<SymbolicSub>(node, other.node));
+      return RealNumber(SymbolicNode::makeNode<SymbolicSub>(node, other.node)->simplify());
     }
 
     RealNumber &operator-=(const RealNumber &other) {
@@ -40,7 +49,7 @@ class RealNumber  {
     }
 
     RealNumber operator*(const RealNumber &other) const {
-      return RealNumber(makeNode<SymbolicMultiplication>(node, other.node));
+      return RealNumber(SymbolicNode::makeNode<SymbolicMultiplication>(node, other.node)->simplify());
     }
 
     RealNumber &operator*=(const RealNumber &other) {
@@ -49,7 +58,7 @@ class RealNumber  {
     }
 
     RealNumber operator/(const RealNumber &other) const {
-      return RealNumber(makeNode<SymbolicFraction>(node, other.node));
+      return RealNumber(SymbolicNode::makeNode<SymbolicFraction>(node, other.node)->simplify());
     }
 
     RealNumber &operator/=(const RealNumber &other) {
@@ -58,7 +67,7 @@ class RealNumber  {
     }
 
     RealNumber operator^(const RealNumber &other) const {
-      return RealNumber(makeNode<SymbolicPow>(node, other.node));
+      return RealNumber(SymbolicNode::makeNode<SymbolicPow>(node, other.node)->simplify());
     }
 
     RealNumber &operator^=(const RealNumber &other) {
@@ -67,7 +76,7 @@ class RealNumber  {
     }
 
     RealNumber sqrt() const {
-      return RealNumber(makeNode<SymbolicSqrt>(node));
+      return RealNumber(SymbolicNode::makeNode<SymbolicSqrt>(node)->simplify());
     }
 
     RealNumber exp() const;

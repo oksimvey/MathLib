@@ -2,9 +2,8 @@
 #define MATHLIB_COMPLEXNUMBER_H
 
 #include "RealNumber.h"
-#include "Scalar.h"
 
-class ComplexNumber : public Scalar {
+class ComplexNumber {
 
     public:
 
