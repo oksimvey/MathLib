@@ -1,8 +1,29 @@
 # ninja log v7
 56	1314	8013706463048591	CMakeFiles/MathLib.dir/src/main/marco/mathlib/main.cpp.obj	f0412e9d3fedf7b9
-4294	4416	8015490707012848	MathLib.exe	bfa5aed230bba5e8
-11	43	8015490664179709	C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build/CMakeFiles/cmake.verify_globs	c1ceb52eaf83b4fb
-51	364	8015506858688996	build.ninja	2188fdf164e2a54a
-51	364	8015506858581878	C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build/cmake_install.cmake	2188fdf164e2a54a
+2778	2903	8016048622643973	MathLib.exe	bfa5aed230bba5e8
+3	37	8016048594890960	C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build/CMakeFiles/cmake.verify_globs	c1ceb52eaf83b4fb
+51	364	8016048824596504	build.ninja	2188fdf164e2a54a
+51	364	8016048824425397	C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build/cmake_install.cmake	2188fdf164e2a54a
 43	1434	8011788198406878	CMakeFiles/MathLib.dir/src/main/marco/mathlib/RationalNumber.cpp.obj	f76c92c03976eb22
-47	4294	8015490664477234	CMakeFiles/MathLib.dir/src/main/marco/mathlib/math/main.cpp.obj	db805267dc1002de
+41	2778	8016048595272649	CMakeFiles/MathLib.dir/src/main/marco/mathlib/math/main.cpp.obj	332fe8a96b2864bb
+3	36	8016049112303330	C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build/CMakeFiles/cmake.verify_globs	c1ceb52eaf83b4fb
+41	3078	8016049112685384	CMakeFiles/MathLib.dir/src/main/marco/mathlib/math/main.cpp.obj	332fe8a96b2864bb
+3079	3301	8016049143056853	MathLib.exe	bfa5aed230bba5e8
+3	36	8016049297971068	C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build/CMakeFiles/cmake.verify_globs	c1ceb52eaf83b4fb
+2	38	8016049318989126	C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build/CMakeFiles/cmake.verify_globs	c1ceb52eaf83b4fb
+3	52	8016050208109877	C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build/CMakeFiles/cmake.verify_globs	c1ceb52eaf83b4fb
+3	43	8016070352877099	C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build/CMakeFiles/cmake.verify_globs	c1ceb52eaf83b4fb
+49	4721	8016070353267867	CMakeFiles/MathLib.dir/src/main/marco/mathlib/math/main.cpp.obj	332fe8a96b2864bb
+4721	4874	8016070399968904	MathLib.exe	bfa5aed230bba5e8
+3	38	8016071049469007	C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build/CMakeFiles/cmake.verify_globs	c1ceb52eaf83b4fb
+42	4548	8016071049807450	CMakeFiles/MathLib.dir/src/main/marco/mathlib/math/main.cpp.obj	332fe8a96b2864bb
+4549	4692	8016071094930022	MathLib.exe	bfa5aed230bba5e8
+3	37	8016071116200791	C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build/CMakeFiles/cmake.verify_globs	c1ceb52eaf83b4fb
+3	37	8016071172174877	C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build/CMakeFiles/cmake.verify_globs	c1ceb52eaf83b4fb
+42	4476	8016071172453074	CMakeFiles/MathLib.dir/src/main/marco/mathlib/math/main.cpp.obj	332fe8a96b2864bb
+4477	4618	8016071216781767	MathLib.exe	bfa5aed230bba5e8
+2	36	8016071251203389	C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build/CMakeFiles/cmake.verify_globs	c1ceb52eaf83b4fb
+3	41	8016071261039419	C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build/CMakeFiles/cmake.verify_globs	c1ceb52eaf83b4fb
+3	35	8016071269659720	C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build/CMakeFiles/cmake.verify_globs	c1ceb52eaf83b4fb
+2	35	8016071276942669	C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build/CMakeFiles/cmake.verify_globs	c1ceb52eaf83b4fb
+4	38	8016071286212942	C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build/CMakeFiles/cmake.verify_globs	c1ceb52eaf83b4fb

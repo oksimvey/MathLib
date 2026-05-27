@@ -1,7 +1,7 @@
 [
 {
   "directory": "C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build",
-  "command": "C:\\msys64\\mingw64\\bin\\clang++.exe -g -std=gnu++23 -O3 -o CMakeFiles\\MathLib.dir\\src\\main\\marco\\mathlib\\math\\main.cpp.obj -c \"C:\\Users\\hapoe\\OneDrive\\Documentos\\My Projects\\MathLib\\src\\main\\marco\\mathlib\\math\\main.cpp\"",
+  "command": "C:\\msys64\\mingw64\\bin\\clang++.exe -I\"C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/src\" -g -std=gnu++23 -O3 -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion -Wcast-qual -Wdiscarded-qualifiers -Wignored-qualifiers -Wwrite-strings -Wnon-virtual-dtor -Woverloaded-virtual -Wold-style-cast -Wswitch-enum -Wswitch-default -Wunused-parameter -o CMakeFiles\\MathLib.dir\\src\\main\\marco\\mathlib\\math\\main.cpp.obj -c \"C:\\Users\\hapoe\\OneDrive\\Documentos\\My Projects\\MathLib\\src\\main\\marco\\mathlib\\math\\main.cpp\"",
   "file": "C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/src/main/marco/mathlib/math/main.cpp",
   "output": "C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build/CMakeFiles/MathLib.dir/src/main/marco/mathlib/math/main.cpp.obj"
 }

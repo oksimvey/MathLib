@@ -10,11 +10,7 @@ class SymbolicNumber : public SymbolicNode {
 
     const double value;
 
-    SymbolicNumber(double value) : value(value) {
-
-
-
-    }
+    SymbolicNumber(double value) : value(value) {   }
 
 
 

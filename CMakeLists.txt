@@ -1,12 +1,63 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.20)  # 3.20+ tem melhor suporte C++23
+project(MathLib LANGUAGES CXX)
 
-project(MathLib)
 
 set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS src/*.cpp)
+
+file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS
+    src/*.cpp
+)
+
 
 add_executable(MathLib ${SRC_FILES}
-    src/main/marco/mathlib/math/number/cas/operations/SymbolicLog.h)
+        src/main/marco/mathlib/math/number/cas/utils/SymbolicExpression.h
+        src/main/marco/mathlib/math/parser/NumericExpressionParser.h
+        src/main/marco/mathlib/math/parser/ExpressionParser.h
+        src/main/marco/mathlib/math/parser/LinearAlgebraParser.h
+        src/main/marco/mathlib/math/parser/CalculusParser.h
+        src/main/marco/mathlib/math/parser/FullParser.h
+        src/main/marco/mathlib/math/parser/ParserUtils.h
+        src/main/marco/mathlib/math/number/cas/SymbolicConstant.h)
 
-target_compile_options(MathLib PRIVATE -O3)
+
+target_include_directories(MathLib PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+)
+
+target_compile_options(MathLib PRIVATE
+    -O3
+
+
+
+    -Wall
+    -Wextra
+    -Wpedantic
+
+
+
+    -Wshadow
+    -Wconversion
+    -Wsign-conversion
+
+
+
+    -Wcast-qual
+    -Wdiscarded-qualifiers
+    -Wignored-qualifiers
+    -Wwrite-strings
+
+
+
+    -Wnon-virtual-dtor
+    -Woverloaded-virtual
+    -Wold-style-cast
+
+
+
+    -Wswitch-enum
+    -Wswitch-default
+    -Wunused-parameter
+)

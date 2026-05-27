@@ -25,6 +25,7 @@ class RealNumber  {
 
 
 
+
     RealNumber(SymbolicNode::NodePtr node) : node(std::move(node)) {}
 
     RealNumber(double value) : node(SymbolicNode::makeNode<SymbolicNumber>(value)) {}
