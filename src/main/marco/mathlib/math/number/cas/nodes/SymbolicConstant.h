@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "nodes/SymbolicNode.h"
+#include "SymbolicNode.h"
 #include <string>
 #include <format>
 
@@ -14,8 +14,6 @@ public:
     const double value;
 
     SymbolicConstant(std::string symbol, double value) : symbol(symbol), value(value) {}
-
-
 
     std::string toString() const override {
         return symbol;

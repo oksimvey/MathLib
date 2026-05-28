@@ -16,7 +16,6 @@ public:
 
   using NodePtr = std::shared_ptr<SymbolicNode>;
 
-  virtual NodePtr simplify() const = 0;
 
   virtual double evaluate() const = 0;
 

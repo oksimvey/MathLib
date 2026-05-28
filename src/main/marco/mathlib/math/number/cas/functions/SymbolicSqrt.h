@@ -5,7 +5,7 @@
 #include "../nodes/SymbolicNodePair.h"
 #include <cmath>
 #include "../utils/CASUtils.h"
-#include "../SymbolicNumber.h"
+#include "../nodes/SymbolicNumber.h"
 
 class SymbolicSqrt : public SymbolicNode {
 
@@ -19,41 +19,6 @@ public:
   }
 
   std::string toLatex() const override { return ""; }
-
- NodePtr simplify() const override {
-
-   // if (CASUtils::isSymbolicNodeOfType<SymbolicPow>(value)) {
-
-   //     auto pow = CASUtils::getSymbolicNodeOfType<SymbolicPow>(value);
-
-   //     NodePtr exponent = pow->right;
-
-    //    if (CASUtils::isSymbolicNodeOfType<SymbolicNumber>(exponent)) {
-
-     //       auto num = CASUtils::getSymbolicNodeOfType<SymbolicNumber>(exponent);
-
-      //      double v = num->value;
-
-            // checa se é inteiro
-     //       if (std::floor(v) == v) {
-
-         //       int n = static_cast<int>(v);
-
-                // expoente par
-        //        if (n % 2 == 0) {
-
-          //          return makeNode<SymbolicPow>(
-          //              pow->left,
-           //             makeNode<SymbolicNumber>(n / 2)
-           //         );
-
-          //      }
-         //   }
-      //  }
-   // }
-
-    return makeNode<SymbolicSqrt>(value);
-}
 
   double evaluate() const override {
     const double &result = value->evaluate();

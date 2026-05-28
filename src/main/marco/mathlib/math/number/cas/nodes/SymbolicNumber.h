@@ -1,6 +1,6 @@
 #pragma once
 
-#include "nodes/SymbolicNode.h"
+#include "SymbolicNode.h"
 #include <string>
 #include <format>
 
@@ -10,9 +10,7 @@ class SymbolicNumber : public SymbolicNode {
 
     const double value;
 
-    SymbolicNumber(double value) : value(value) {   }
-
-
+    SymbolicNumber(double value) : value(value) {}
 
     std::string toString() const override {
         return std::format("{}", value);
@@ -22,9 +20,6 @@ class SymbolicNumber : public SymbolicNode {
         return "";
     }
 
-    NodePtr simplify()  const override {
-        return makeNode<SymbolicNumber>(value);
-    }
 
     double evaluate()  const override {
         return value;

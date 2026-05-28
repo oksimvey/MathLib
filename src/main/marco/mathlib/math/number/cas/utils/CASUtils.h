@@ -25,12 +25,21 @@ class CASUtils {
         return getSymbolicNodeOfType<T>(node) != nullptr;
     }
 
-
-
-
+    template<typename T>
+    static bool areBothNodesOfType(const SymbolicNode::NodePtr& node1, const SymbolicNode::NodePtr& node2) {
+        return isSymbolicNodeOfType<T>(node1) && isSymbolicNodeOfType<T>(node2);
+    }
 
     static std::string getStringAsChildren(const SymbolicNode::NodePtr& node) {
         if (isSymbolicNodePair(node)) {
+            return "(" + node-> toString() + ")";
+        }
+        return node->toString();
+    }
+
+    template<typename T>
+    static std::string getAsChildrenIfType(const SymbolicNode::NodePtr& node) {
+        if (isSymbolicNodeOfType<T>(node)) {
             return "(" + node-> toString() + ")";
         }
         return node->toString();

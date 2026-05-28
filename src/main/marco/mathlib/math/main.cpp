@@ -8,13 +8,14 @@ auto main() -> int {
   SetConsoleOutputCP(CP_UTF8);
 
  
-  RealNumber a = Parser::fromString("1 + 2.5");
+  RealNumber a(0.666);
 
 
- 
+ RealNumber result = a;
 
-  std::cout << a.toString() << std::endl;
+  std::cout << result.toString() << std::endl;
 
+  std::cout << result.evaluate() << std::endl;
 
   return 0;
 }

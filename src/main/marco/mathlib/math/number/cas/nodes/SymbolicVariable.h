@@ -3,7 +3,7 @@
 #include <unordered_map>
 
 #include "main/marco/mathlib/math/number/scalar/ComplexNumber.h"
-#include "nodes/SymbolicNode.h"
+#include "SymbolicNode.h"
 
 class SymbolicVariable : public SymbolicNode {
 
@@ -26,19 +26,10 @@ public:
 
     std::string toLatex() const override { return ""; }
 
-    NodePtr simplify() const override {
-        return makeNode<SymbolicVariable>(name, variables&);
-    }
-
-    double evaluateVariable(const double& value){
-        return value;
-    } 
-
     double evaluate() const override {
         if (variables->contains(name)) {
             return variables->at(name);
         }
         throw std::runtime_error("Cannot evaluate variable");
-        return 0;
     }
 };

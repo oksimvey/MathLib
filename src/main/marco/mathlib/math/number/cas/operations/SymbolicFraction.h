@@ -8,8 +8,8 @@
 class SymbolicFraction : public SymbolicNodePair {
 
 public:
-  SymbolicFraction(NodePtr left, NodePtr right)
-      : SymbolicNodePair(std::move(left), std::move(right)) {}
+  SymbolicFraction(NodePtr left_, NodePtr right_)
+      : SymbolicNodePair(std::move(left_), std::move(right_)) {}
 
   std::string centerText(const std::string &text, size_t width)const {
     size_t padding = (width - text.size()) / 2;
@@ -21,9 +21,7 @@ public:
         return "";
     }
 
-    NodePtr simplify() const override {
-        return SymbolicNode::makeNode<SymbolicFraction>(left, right);
-    }
+
 
   double evaluate() const override { return left->evaluate() / right->evaluate(); }
 

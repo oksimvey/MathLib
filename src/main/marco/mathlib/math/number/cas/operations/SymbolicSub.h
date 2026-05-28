@@ -6,7 +6,7 @@ class SymbolicSub : public SymbolicNodePair {
 
 public:
 
-    SymbolicSub(NodePtr left, NodePtr right) : SymbolicNodePair(std::move(left), std::move(right)) {}
+    SymbolicSub(NodePtr left_, NodePtr right_) : SymbolicNodePair(std::move(left_), std::move(right_)) {}
 
     double evaluate() const override { return left->evaluate() - right->evaluate(); }
 
@@ -14,9 +14,7 @@ public:
         return "";
     }
 
-    NodePtr simplify() const override {
-        return SymbolicNode::makeNode<SymbolicSub>(left, right);
-    }
+
     
     std::string toString() const override { return left->toString() + " - " + right->toString(); }
 };

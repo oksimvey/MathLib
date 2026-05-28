@@ -1,12 +1,13 @@
 #pragma once
 
-#include "../SymbolicVariable.h"
+#include "SymbolicSum.h"
+#include "../utils/CASUtils.h"
 #include "../nodes/SymbolicNodePair.h"
 
 class SymbolicMultiplication : public SymbolicNodePair {
     
     public :
-    SymbolicMultiplication(NodePtr left, NodePtr right) : SymbolicNodePair(std::move(left), std::move(right)) {}
+    SymbolicMultiplication(NodePtr left_, NodePtr right_) : SymbolicNodePair(std::move(left_), std::move(right_)) {}
 
     double evaluate() const override { return left->evaluate() * right->evaluate(); }
 
@@ -14,15 +15,8 @@ class SymbolicMultiplication : public SymbolicNodePair {
         return "";
     }
 
-    NodePtr simplify() const override {
-        return SymbolicNode::makeNode<SymbolicMultiplication>(left, right);
-    }
-
     std::string toString() const override {
-          if (dynamic_cast<SymbolicVariable *>(right.get())) {
-            return left->toString() + right->toString();
-          }
         
-        return left->toString() + " * " + right->toString(); }
+        return CASUtils::getAsChildrenIfType<SymbolicSum>(left) + " * " + CASUtils::getAsChildrenIfType<SymbolicSum>(right); }
 
 };
