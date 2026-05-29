@@ -1,0 +1,8 @@
+//
+// Created by hapoe on 5/28/2026.
+//
+
+#ifndef MATHLIB_SYMBOLICNNODE_H
+#define MATHLIB_SYMBOLICNNODE_H
+
+#endif //MATHLIB_SYMBOLICNNODE_H

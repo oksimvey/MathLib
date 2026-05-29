@@ -1,0 +1,8 @@
+//
+// Created by hapoe on 5/28/2026.
+//
+
+#ifndef MATHLIB_SYMBOLICVARIABLE_H
+#define MATHLIB_SYMBOLICVARIABLE_H
+
+#endif //MATHLIB_SYMBOLICVARIABLE_H

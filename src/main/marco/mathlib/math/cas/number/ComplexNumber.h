@@ -1,0 +1,8 @@
+//
+// Created by hapoe on 5/28/2026.
+//
+
+#ifndef MATHLIB_COMPLEXNUMBER_H
+#define MATHLIB_COMPLEXNUMBER_H
+
+#endif //MATHLIB_COMPLEXNUMBER_H

@@ -1,0 +1,8 @@
+//
+// Created by hapoe on 5/28/2026.
+//
+
+#ifndef MATHLIB_SYMBOLICCONSTANT_H
+#define MATHLIB_SYMBOLICCONSTANT_H
+
+#endif //MATHLIB_SYMBOLICCONSTANT_H
