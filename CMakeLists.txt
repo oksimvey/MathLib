@@ -12,17 +12,7 @@ file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS
 )
 
 
-add_executable(MathLib ${SRC_FILES}
-        src/main/marco/mathlib/math/number/cas/nodes/SymbolicExpression.h
-        src/main/marco/mathlib/math/number/cas/parser/NumericExpressionParser.h
-        src/main/marco/mathlib/math/number/cas/parser/LinearAlgebraParser.h
-        src/main/marco/mathlib/math/number/cas/parser/CalculusParser.h
-        src/main/marco/mathlib/math/number/cas/parser/FullParser.h
-        src/main/marco/mathlib/math/number/cas/parser/ParserUtils.h
-        src/main/marco/mathlib/math/number/cas/nodes/SymbolicConstant.h
-        src/main/marco/mathlib/math/number/cas/simplifier/NumericSimplifier.h
-        src/main/marco/mathlib/math/number/cas/simplifier/ExpressionSimplifier.h
-        src/main/marco/mathlib/math/number/cas/writter/NumericWritter.h)
+add_executable(MathLib ${SRC_FILES})
 
 
 target_include_directories(MathLib PRIVATE

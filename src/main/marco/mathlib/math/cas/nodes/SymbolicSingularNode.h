@@ -2,7 +2,4 @@
 // Created by hapoe on 5/28/2026.
 //
 
-#ifndef MATHLIB_SYMBOLICSINGULARNODE_H
-#define MATHLIB_SYMBOLICSINGULARNODE_H
-
-#endif //MATHLIB_SYMBOLICSINGULARNODE_H
+#pragma once

@@ -1,8 +1,8 @@
-//
-// Created by hapoe on 5/28/2026.
-//
 
-#ifndef MATHLIB_SYMBOLICSUB_H
-#define MATHLIB_SYMBOLICSUB_H
+#include "main/marco/mathlib/math/cas/nodes/SymbolicNode.h"
 
-#endif //MATHLIB_SYMBOLICSUB_H
+
+class SymbolicSub : public SymbolicNode {
+
+public:
+};

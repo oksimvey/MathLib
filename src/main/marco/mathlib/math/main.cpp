@@ -1,21 +1,14 @@
-#include "number/cas/utils/Parser.h"
-#include "windows.h"
-#include "number/scalar/RealNumber.h"
+#include "cas/number/RealNumber.h"
+#include <array>
+#include <bit>
 #include <iostream>
+#include <ostream>
+#include <winsock.h>
 
-auto main() -> int {
+int main(){
 
-  SetConsoleOutputCP(CP_UTF8);
+  RealNumber result = 0.1f;
 
- 
-  RealNumber a(0.666);
-
-
- RealNumber result = a;
-
-  std::cout << result.toString() << std::endl;
-
-  std::cout << result.evaluate() << std::endl;
-
-  return 0;
+  std::cout << result.value->toString() << std::endl;
+  std::cout << result.value->evaluate() << std::endl;
 }

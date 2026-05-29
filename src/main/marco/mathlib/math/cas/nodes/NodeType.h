@@ -2,15 +2,32 @@
 // Created by hapoe on 5/28/2026.
 //
 
-#ifndef MATHLIB_NODETYPES_H
-#define MATHLIB_NODETYPES_H
-
+#pragma once
 enum class NodeType {
-    Number,
+    Integer,
+    // operations
     Addition,
     Subtract,
     Multiply,
-    Fraction
+    Fraction,
+    Pow,
+    Log,
+    // Functions
+    Mod,
+    Sqrt,
+    Exp,
+    Ln,
+    Cos,
+    Sin,
+    Tan,
+    ArcCos,
+    ArcSin,
+    ArcTan,
+    CosH,
+    SinH,
+    TanH,
+    ArcCosH,
+    ArcSinH,
+    ArcTanH,
 };
 
-#endif //MATHLIB_NODETYPES_H
