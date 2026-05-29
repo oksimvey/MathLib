@@ -7,8 +7,18 @@
 
 int main(){
 
-  RealNumber result = 0.1f;
+  
+  RealNumber a = 2.0/3;
 
-  std::cout << result.value->toString() << std::endl;
-  std::cout << result.value->evaluate() << std::endl;
+  RealNumber b = 4.0/3;
+
+
+
+  std::cout << a.value->toString() << std::endl;
+
+  std::cout << b.value->toString() << std::endl;
+
+  std::cout << (a+b).value->toString() << std::endl;
+
+
 }

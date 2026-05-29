@@ -4,18 +4,11 @@
 
 #pragma once
 
+#include <concepts>
 template<typename T>
-struct Scalar {
-
-    virtual T operator+(const T& other) const = 0;
-
-    virtual T operator-(const T& other) const = 0;
-
-    virtual T operator*(const T& other) const = 0;
-
-    virtual T operator/(const T& other) const = 0;
-
-
-
-
+concept Scalar = requires(T a, T b) {
+    { a + b } -> std::same_as<T>;
+    { a - b } -> std::same_as<T>;
+    { a * b } -> std::same_as<T>;
+    { a / b } -> std::same_as<T>;
 };

@@ -5,12 +5,20 @@
 #include <vector>
 
 #include "main/marco/mathlib/math/cas/nodes/SymbolicNode.h"
-#include "main/marco/mathlib/math/cas/nodes/valued/SymbolicInteger.h"
+
+#include "main/marco/mathlib/math/cas/simplifier/CASSimplifier.h"
+
+class SumSimplifier;
 
 class SymbolicSum : public SymbolicNode {
+    
     std::vector<NodePtr> elements;
 
 public:
+
+std::vector<NodePtr> getElements() const {
+    return elements;
+}
 
     template <typename... Args>
         requires (std::is_convertible_v<Args, NodePtr> && ...)
@@ -39,8 +47,14 @@ public:
         return str;
     }
 
+    [[nodiscard]] NodePtr simplify() const override {
+        return CASSimplifier::simplifySum(elements);
+    }
+
     [[nodiscard]] std::string toString() const override {
+
         std::string result;
+
         for (size_t i = 0; i < elements.size(); i++) {
 
             const double value = elements[i]->evaluate();

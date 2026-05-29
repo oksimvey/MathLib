@@ -5,6 +5,7 @@
 #pragma once
 enum class NodeType {
     Integer,
+    Variable,
     // operations
     Addition,
     Subtract,
