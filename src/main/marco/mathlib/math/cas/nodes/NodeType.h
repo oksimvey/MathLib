@@ -6,9 +6,9 @@
 enum class NodeType {
     Integer,
     Variable,
+    Negative,
     // operations
-    Addition,
-    Subtract,
+    Sum,
     Multiply,
     Fraction,
     Pow,

@@ -5,6 +5,7 @@
 			"expression" : "C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/src/*.cpp",
 			"paths" : 
 			[
+				"C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/src/main/marco/mathlib/math/cas/simplifier/CASSimplifier.cpp",
 				"C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/src/main/marco/mathlib/math/main.cpp"
 			],
 			"recurse" : true

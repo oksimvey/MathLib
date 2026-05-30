@@ -123,7 +123,7 @@ public:
   [[nodiscard]] NodeType kind() const override { return NodeType::Fraction; }
 
   [[nodiscard]] std::string toString() const override {
-    return numerator->toString() + " / " + denominator->toString();
+    return numerator->toString() + "/" + denominator->toString();
   };
 
   [[nodiscard]] std::string toLatexString() const override { return ""; };

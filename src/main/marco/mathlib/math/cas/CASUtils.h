@@ -1,6 +1,9 @@
 #pragma once
 
 #include "main/marco/mathlib/math/cas/nodes/SymbolicNode.h"
+#include "nodes/NodeType.h"
+#include "nodes/SymbolicNode.h"
+#include <algorithm>
 #include <cmath>
 #include <iomanip>
 #include <memory>
@@ -10,6 +13,15 @@
 class CASUtils {
 
     public:
+
+
+
+    static constexpr std::array<NodeType, 2> multipleNodeTypes = {
+        NodeType::Sum,
+        NodeType::Multiply
+    };
+
+
 static int countDecimalDigits(double value) {
     value = std::fabs(value);
 
@@ -48,10 +60,14 @@ static int countDecimalDigits(double value) {
         return isSymbolicNodeOfType<T>(node1) && isSymbolicNodeOfType<T>(node2);
     }
 
+    static bool isMultipleNode(const SymbolicNode::NodePtr& node){
+        return std::ranges::contains(multipleNodeTypes, node->kind());
+    }
 
-    template<typename T>
-    static std::string getAsChildrenIfType(const SymbolicNode::NodePtr& node) {
-        if (isSymbolicNodeOfType<T>(node)) {
+   
+
+    static std::string getWithParenthesisIfMultiple(const SymbolicNode::NodePtr& node) {
+        if (isMultipleNode(node)) {
             return "(" + node-> toString() + ")";
         }
         return node->toString();

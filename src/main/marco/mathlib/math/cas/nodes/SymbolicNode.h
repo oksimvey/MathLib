@@ -32,6 +32,7 @@ public:
 
     [[nodiscard]] virtual std::string toLatexString() const = 0;
 
+
     [[nodiscard]] virtual NodePtr simplify() const  = 0;
 
     [[nodiscard]] virtual double evaluate() const = 0;

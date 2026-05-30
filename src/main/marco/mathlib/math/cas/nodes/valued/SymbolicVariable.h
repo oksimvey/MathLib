@@ -9,13 +9,13 @@ class SymbolicVariable : public SymbolicNode {
 
     std::string var;
 
-    std::unordered_map<std::string, T>* varManager;
+    T varValue;
 
     public:
 
-    void setValue(const T& value){(*varManager)[var] = value;}
+    void setValue(const T& value){(*varValue)[var] = value;}
 
-    T getValue(){return (*varManager)[var];}
+    T getValue(){return (*varValue)[var];}
 
      [[nodiscard]] NodeType kind() const override { return NodeType::Variable; }
 
