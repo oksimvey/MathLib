@@ -1,0 +1,23 @@
+BasedOnStyle: LLVM       # Base style: LLVM, Google, Chromium, Mozilla, WebKit, Microsoft
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+
+
+# Braces
+BreakBeforeBraces: Attach   # Allman, Attach, Linux, Mozilla, Stroustrup
+
+
+
+# Column limit (0 = no limit)
+ColumnLimit: 100
+
+# Alignment
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+
+# Includes
+SortIncludes: CaseSensitive
+
+# Pointer/reference alignment
+PointerAlignment: Left      # int* x  vs  int *x  vs  int * x

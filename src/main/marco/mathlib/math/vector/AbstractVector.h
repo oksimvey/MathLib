@@ -22,6 +22,63 @@ class AbstractVector {
 
        AbstractVector() : AbstractVector({0}) {}
 
+
+       AbstractVector<Dimension, ScalarType> operator+(const AbstractVector<Dimension, ScalarType>& other) const {
+              
+       }
+
+       AbstractVector<Dimension, ScalarType>& operator+=(const AbstractVector<Dimension, ScalarType>& other)  {
+              
+       }
+
+        AbstractVector<Dimension, ScalarType> operator-(const AbstractVector<Dimension, ScalarType>& other) const {
+              
+       }
+
+       AbstractVector<Dimension, ScalarType>& operator-=(const AbstractVector<Dimension, ScalarType>& other)  {
+              
+       }
+
+        AbstractVector<Dimension, ScalarType> operator*(const AbstractVector<Dimension, ScalarType>& other) const {
+              
+       }
+
+       AbstractVector<Dimension, ScalarType>& operator*=(const AbstractVector<Dimension, ScalarType>& other)  {
+              
+       }
+
+        AbstractVector<Dimension, ScalarType> operator/(const ScalarType& other) const {
+              
+       }
+
+       AbstractVector<Dimension, ScalarType>& operator/=(const ScalarType& other)  {
+              
+       }
+
+       ScalarType operator*(const ScalarType& other) const {
+              
+       }
+
+       bool isPerpendicular(const AbstractVector<Dimension, ScalarType>& other) const {
+              
+       }
+
+       bool operator|(const AbstractVector<Dimension, ScalarType>& other){
+
+       }
+
+       double getAngleBetween(const AbstractVector<Dimension, ScalarType>& other){
+              
+       }
+
+
+
+
+
+
+
+
+
        
 
        

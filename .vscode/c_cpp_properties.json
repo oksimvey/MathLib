@@ -6,13 +6,18 @@
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/src/main/marco/mathlib",
                 "C:/Program Files/Java/jdk-21/include",
-                "C:/Program Files/Java/jdk-21/include/win32"
+                "C:/Program Files/Java/jdk-21/include/win32",
+                "C:/Program Files (x86)/Intel/oneAPI/compiler/latest/include",
+                "C:/Program Files (x86)/Intel/oneAPI/compiler/latest/include/sycl"
             ],
             "defines": [
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE"
-            ]
+            ],
+            "compilerPath": "C:/Program Files (x86)/Intel/oneAPI/compiler/latest/bin/compiler/icpx.exe",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-gcc-x64"
         }
     ],
     "version": 4

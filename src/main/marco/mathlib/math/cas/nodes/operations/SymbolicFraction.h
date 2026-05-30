@@ -126,7 +126,8 @@ public:
     return numerator->toString() + "/" + denominator->toString();
   };
 
-  [[nodiscard]] std::string toLatexString() const override { return ""; };
+  [[nodiscard]] std::string toLatexString() const override {
+     return "\frac{" + numerator->toLatexString() + "}{" + denominator->toLatexString() + "}"; }  ;
 
   [[nodiscard]] double evaluate() const override {
     return numerator->evaluate() / denominator->evaluate();

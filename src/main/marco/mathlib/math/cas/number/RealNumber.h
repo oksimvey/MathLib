@@ -10,6 +10,7 @@
 #include "main/marco/mathlib/math/cas/nodes/valued/SymbolicInteger.h"
 #include "main/marco/mathlib/math/cas/nodes/operations/SymbolicFraction.h"
 #include "main/marco/mathlib/math/cas/nodes/valued/SymbolicNegativeNode.h"
+#include "main/marco/mathlib/math/cas/nodes/functions/SymbolicSqrt.h"
 #include <memory>
 
 class RealNumber {
@@ -60,6 +61,10 @@ public:
 
   RealNumber operator/(const RealNumber &other) const  {
     return RealNumber(value->evaluate() / other.value->evaluate());
+  }
+
+  RealNumber sqrt() const {
+    return RealNumber(SymbolicNode::makeNode<SymbolicSqrt>(value));
   }
 };
 
