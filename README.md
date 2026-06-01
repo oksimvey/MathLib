@@ -14,6 +14,7 @@
 A Mathematics & Physics Library written in QuantC, C, and C++.  
 Bindings for **Java**, **Python**, and **JavaScript (WebAssembly)**.
 
+![Status](https://img.shields.io/badge/status-in%20development-orange?style=flat-square)
 [![Language](https://img.shields.io/badge/Core-QuantC%20%2F%20C%20%2F%20C%2B%2B-blue?style=flat-square)](/)
 [![Bindings](https://img.shields.io/badge/Bindings-Java%20%7C%20Python%20%7C%20JS%20(WASM)-green?style=flat-square)](/)
 [![License](https://img.shields.io/badge/License-MIT-purple?style=flat-square)](/)

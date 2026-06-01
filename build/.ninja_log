@@ -1,9 +1,9 @@
 # ninja log v7
 56	1314	8013706463048591	CMakeFiles/MathLib.dir/src/main/marco/mathlib/main.cpp.obj	f0412e9d3fedf7b9
-3187	3324	8018735919766788	MathLib.exe	3316b4de313ef8bc
-3	37	8018735887928428	C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build/CMakeFiles/cmake.verify_globs	c1ceb52eaf83b4fb
-35	226	8019120305279460	build.ninja	2188fdf164e2a54a
-35	226	8019120305127898	C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build/cmake_install.cmake	2188fdf164e2a54a
+111	451	8019129191969597	MathLib.exe	8b8ade426ec81290
+2	39	8019129190889298	C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build/CMakeFiles/cmake.verify_globs	c1ceb52eaf83b4fb
+35	226	8020465197637817	build.ninja	2188fdf164e2a54a
+35	226	8020465197549250	C:/Users/hapoe/OneDrive/Documentos/My Projects/MathLib/build/cmake_install.cmake	2188fdf164e2a54a
 43	1434	8011788198406878	CMakeFiles/MathLib.dir/src/main/marco/mathlib/RationalNumber.cpp.obj	f76c92c03976eb22
-42	3186	8018735888316624	CMakeFiles/MathLib.dir/src/main/marco/mathlib/math/main.cpp.obj	4bb88b8d0e605825
-45	2369	8018706132086849	CMakeFiles/MathLib.dir/src/main/marco/mathlib/math/cas/simplifier/CASSimplifier.cpp.obj	3bb8b489cd8dfcb6
+44	110	8019129191303185	CMakeFiles/MathLib.dir/src/main/marco/mathlib/math/main.cpp.obj	332fe8a96b2864bb
+43	2994	8019128948416165	CMakeFiles/MathLib.dir/src/main/marco/mathlib/math/cas/simplifier/CASSimplifier.cpp.obj	25bc9517a9b06ece
